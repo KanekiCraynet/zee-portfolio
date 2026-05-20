@@ -1,0 +1,13 @@
+{
+  "company": "Warnet (Internet Cafe)",
+  "role": "Staf Part-time",
+  "period": "Jan 2025 — Agu 2025",
+  "description": "Melayani pelanggan di kasir, input billing, pengantaran pesanan, dan penanganan permintaan langsung. Memantau jaringan warnet, mendiagnosis gangguan koneksi umum, serta melakukan pengecekan rutin workstation dan perangkat.",
+  "technologies": [
+    "Jaringan",
+    "Billing System",
+    "Hardware",
+    "Troubleshooting"
+  ],
+  "sortOrder": 3
+}

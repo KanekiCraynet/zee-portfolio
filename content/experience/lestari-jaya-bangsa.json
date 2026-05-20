@@ -1,0 +1,17 @@
+{
+  "company": "PT Lestari Jaya Bangsa",
+  "role": "Magang Web Developer (Program Kampus)",
+  "period": "Feb 2025 — Jul 2025",
+  "description": "Membangun website company profile secara mandiri dari nol sebagai developer tunggal. Backend menggunakan Laravel 12.x, SQLite, Redis queue/cache, Laravel Sanctum, Spatie Permissions untuk RBAC 3 level, dan Spatie Media Library; frontend menggunakan Tailwind CSS v4, Alpine.js, Chart.js, Vite, dan Axios.",
+  "technologies": [
+    "Laravel 12",
+    "SQLite",
+    "Redis",
+    "Sanctum",
+    "Spatie Permissions",
+    "Tailwind CSS",
+    "Alpine.js",
+    "Chart.js"
+  ],
+  "sortOrder": 1
+}

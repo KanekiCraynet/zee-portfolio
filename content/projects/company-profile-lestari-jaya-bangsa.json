@@ -1,0 +1,18 @@
+{
+  "title": "Website Company Profile — PT Lestari Jaya Bangsa",
+  "description": "Aplikasi web full-stack untuk profil perusahaan yang dibangun mandiri dari nol saat magang, mencakup backend Laravel, RBAC, media library, dan frontend modern.",
+  "tags": [
+    "Laravel",
+    "Tailwind CSS",
+    "Redis",
+    "SQLite",
+    "Alpine.js"
+  ],
+  "liveUrl": null,
+  "githubUrl": "https://github.com/KanekiCraynet/profile-company",
+  "featured": true,
+  "coverImageUrl": null,
+  "coverColor": "emerald",
+  "sortOrder": 1,
+  "status": "published"
+}

@@ -1,0 +1,85 @@
+---
+title: "TypeScript untuk project web yang lebih aman dan mudah dirawat"
+excerpt: >-
+  Panduan ringkas memakai TypeScript di project web modern agar kode lebih jelas, minim bug, dan tetap nyaman dikerjakan dalam jangka panjang.
+date: 2026-02-15
+tags:
+  - TypeScript
+  - Web Development
+  - Frontend
+published: true
+coverImageUrl: null
+---
+
+## Kenapa TypeScript penting untuk web developer
+
+JavaScript fleksibel, tetapi fleksibilitas itu kadang membuat bug sulit dilacak. TypeScript membantu memberi batas yang lebih jelas. Saat tipe data salah, kita bisa mengetahuinya lebih cepat sebelum kode masuk ke production.
+
+Untuk project web seperti dashboard admin, company profile dengan CMS, aplikasi PPOB, atau frontend berbasis API, TypeScript membuat struktur data lebih mudah dipahami. Ini membantu saat project mulai punya banyak komponen, form, response API, dan state.
+
+Keyword yang relevan untuk topik ini adalah TypeScript best practices, web development Indonesia, frontend developer, aplikasi web modern, dan clean code TypeScript.
+
+## Mulai dari strict mode
+
+Kalau memakai TypeScript, aktifkan strict mode sejak awal. Ini memang membuat error lebih banyak di awal, tetapi hasilnya kode lebih rapi.
+
+Contoh konfigurasi dasar:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true
+  }
+}
+```
+
+Strict mode membantu mendeteksi nilai null, tipe yang tidak jelas, dan akses array yang belum tentu ada. Untuk project jangka panjang, ini jauh lebih aman daripada membiarkan semuanya bertipe any.
+
+## Hindari any jika masih bisa dijelaskan
+
+Tipe any membuat TypeScript kehilangan manfaatnya. Kadang any memang diperlukan, misalnya saat membaca data dari library yang belum punya tipe jelas. Tapi untuk data utama seperti user, project, post, atau response API, sebaiknya buat tipe sendiri.
+
+Contoh sederhana:
+
+```ts
+type Project = {
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+  liveUrl?: string;
+};
+```
+
+Dengan tipe seperti ini, komponen yang menerima data project akan lebih mudah dibaca. Editor juga bisa memberi autocomplete yang akurat.
+
+## Buat tipe dari kebutuhan nyata
+
+Jangan membuat tipe terlalu rumit di awal. Mulai dari data yang benar-benar dipakai. Kalau halaman hanya butuh title, slug, dan excerpt, tidak perlu memaksa semua field masuk ke komponen.
+
+Pendekatan ini membuat kode lebih ringan dan tidak terlalu kaku. TypeScript seharusnya membantu kerja, bukan membuat developer takut mengubah kode.
+
+## Validasi data dari API
+
+TypeScript memeriksa kode saat development, tetapi data dari API tetap bisa salah. Karena itu, response dari API tetap perlu divalidasi, terutama untuk form kontak, transaksi, login, atau data yang berasal dari user.
+
+Untuk project kecil, validasi manual masih cukup. Untuk project yang lebih besar, library seperti Zod bisa membantu membuat schema validasi yang konsisten.
+
+## Gunakan nama tipe yang mudah dipahami
+
+Nama tipe harus menjelaskan isinya. Hindari nama seperti Data, Item, atau Props kalau konteksnya tidak jelas. Lebih baik gunakan BlogPost, ProjectCardProps, ContactFormInput, atau ApiResponse.
+
+Nama yang jelas membuat kode lebih mudah dibaca oleh orang lain, termasuk recruiter yang membuka repository GitHub.
+
+## TypeScript dan portfolio developer
+
+Untuk portfolio web developer, TypeScript memberi kesan bahwa project dibuat dengan standar yang rapi. Bukan karena TypeScript terlihat keren, tetapi karena struktur datanya lebih mudah diperiksa.
+
+Di website portfolio, TypeScript bisa dipakai untuk mengetik data project, pengalaman kerja, skill, metadata SEO, dan konten blog. Hasilnya, perubahan data lebih aman dan error lebih mudah ditemukan saat build.
+
+## Penutup
+
+TypeScript bukan alat ajaib, tetapi sangat membantu untuk menjaga kualitas kode. Mulai dari strict mode, hindari any yang tidak perlu, buat tipe sesuai kebutuhan, dan validasi data dari luar aplikasi.
+
+Kalau kebiasaan ini dilakukan dari awal, project web akan lebih mudah dirawat, baik untuk portfolio pribadi maupun aplikasi production.

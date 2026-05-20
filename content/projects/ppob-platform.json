@@ -1,0 +1,16 @@
+{
+  "title": "Platform Top-up & Pembayaran Tagihan (PPOB)",
+  "description": "Platform multi-layanan untuk top-up game, isi ulang dompet digital, dan pembayaran tagihan dengan integrasi API payment gateway dan validasi input transaksi.",
+  "tags": [
+    "CodeIgniter 4",
+    "MySQL",
+    "Payment API"
+  ],
+  "liveUrl": null,
+  "githubUrl": null,
+  "featured": true,
+  "coverImageUrl": null,
+  "coverColor": "violet",
+  "sortOrder": 3,
+  "status": "published"
+}
