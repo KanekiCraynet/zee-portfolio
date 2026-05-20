@@ -11,6 +11,7 @@ const SITE_KEYWORDS = [
   "Phalosa Nugroho",
   "Dzakri Nugroho",
   "Zee Developer",
+  "xenzee.site",
   // Role utama
   "Web Developer Indonesia",
   "Web Developer Pekalongan",
@@ -18,34 +19,78 @@ const SITE_KEYWORDS = [
   "Full Stack Developer PHP",
   "Full Stack Developer Indonesia",
   "PHP Developer Indonesia",
+  "Frontend Developer Indonesia",
+  "Backend Developer Indonesia",
+  "Junior Web Developer Indonesia",
+  "Junior Developer Pekalongan",
   // Stack teknis
   "Laravel Developer Indonesia",
   "Laravel Developer Pekalongan",
   "WordPress Developer Indonesia",
+  "WordPress Developer Pekalongan",
   "CodeIgniter Developer Indonesia",
+  "Next.js Developer Indonesia",
+  "React Developer Indonesia",
   "Tailwind CSS Developer",
   "Alpine.js Developer",
+  "MySQL Developer Indonesia",
+  "REST API Developer Indonesia",
   // IT & Administrasi
   "IT Support Indonesia",
   "IT Support Pekalongan",
   "Administrasi Sistem",
   "Operasional IT",
   "Staf IT Pekalongan",
-  // Local SEO
+  "Teknisi Komputer Pekalongan",
+  "Jaringan Komputer Pekalongan",
+  // Jasa / layanan
   "Jasa Pembuatan Website Pekalongan",
+  "Jasa Website Murah Pekalongan",
+  "Jasa Website UMKM Pekalongan",
+  "Jasa Website Company Profile Pekalongan",
+  "Jasa Website Toko Online Pekalongan",
+  "Jasa Pembuatan Aplikasi Web Indonesia",
+  "Jasa Web Developer Freelance Indonesia",
+  "Jasa Dashboard Admin",
+  "Jasa Integrasi API",
+  // Geo — kota-kota sekitar Pekalongan
   "Programmer Pekalongan",
   "Developer Freelance Pekalongan",
   "Jasa Website Jawa Tengah",
-  // Status / fresh grad
+  "Web Developer Batang",
+  "Web Developer Pemalang",
+  "Web Developer Tegal",
+  "Web Developer Brebes",
+  "Web Developer Kendal",
+  "Web Developer Semarang",
+  "Web Developer Kajen",
+  "Jasa Website Batang",
+  "Jasa Website Pemalang",
+  "Jasa Website Tegal",
+  "Jasa Website Semarang",
+  // Status / fresh grad / rekrutmen
   "Fresh Graduate Web Developer",
   "Mahasiswa Informatika Web Developer",
   "Portfolio Mahasiswa Informatika",
   "Web Developer Fresh Graduate Indonesia",
+  "Lowongan Web Developer Pekalongan",
+  "Hire Web Developer Pekalongan",
+  "Cari Web Developer Indonesia",
+  "Rekrut Web Developer Indonesia",
   // Portfolio umum
   "Portfolio Web Developer",
   "Portfolio Developer Indonesia",
   "Portfolio PHP Developer",
   "Portofolio Web Developer Indonesia",
+  "Portfolio Full Stack Developer",
+  "Portfolio Laravel Developer",
+  "Portfolio Next.js Developer",
+  // Niche / spesifik
+  "Website PPOB Indonesia",
+  "Aplikasi Kasir Web",
+  "Company Profile Website",
+  "Dashboard Admin Laravel",
+  "Manga Platform Web",
 ];
 
 export const rootMetadata: Metadata = {
@@ -249,6 +294,16 @@ export function buildPersonJsonLd(config: SiteConfig) {
       "@type": "Country",
       name: "Indonesia",
     },
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Universitas Muhammadiyah Kendal Batang",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Batang",
+        addressRegion: "Jawa Tengah",
+        addressCountry: "ID",
+      },
+    },
     knowsAbout: [
       "Web Development",
       "Full Stack Development",
@@ -256,17 +311,25 @@ export function buildPersonJsonLd(config: SiteConfig) {
       "Laravel",
       "CodeIgniter",
       "WordPress",
+      "Next.js",
+      "React",
       "TypeScript",
       "JavaScript",
+      "Alpine.js",
+      "Tailwind CSS",
       "MySQL",
       "SQLite",
       "Redis",
-      "Tailwind CSS",
-      "Alpine.js",
+      "REST API",
       "IT Support",
       "Administrasi Sistem",
       "Jaringan Komputer",
       "Linux",
+      "Cloudflare Workers",
+      "Git",
+      "Pembuatan Website",
+      "Company Profile Website",
+      "Dashboard Admin",
     ],
     hasOccupation: {
       "@type": "Occupation",
@@ -309,6 +372,12 @@ export function buildServiceJsonLd() {
     provider: { "@id": `${SITE_URL}/#person` },
     areaServed: [
       { "@type": "City", name: "Pekalongan" },
+      { "@type": "City", name: "Batang" },
+      { "@type": "City", name: "Pemalang" },
+      { "@type": "City", name: "Tegal" },
+      { "@type": "City", name: "Brebes" },
+      { "@type": "City", name: "Kendal" },
+      { "@type": "City", name: "Semarang" },
       { "@type": "AdministrativeArea", name: "Jawa Tengah" },
       { "@type": "Country", name: "Indonesia" },
     ],
@@ -330,19 +399,39 @@ export function buildServiceJsonLd() {
 export function buildFaqJsonLd() {
   const questions = [
     {
-      question: "Apa yang bisa dinilai rekruter dari portofolio ini?",
+      question: "Siapa Dzakri Phalosa Nugroho?",
       answer:
-        "Rekruter bisa melihat stack yang saya kuasai, jenis proyek yang pernah saya kerjakan, cara saya menjelaskan pengalaman, dan area kerja yang paling relevan untuk posisi junior developer atau IT support.",
+        "Mahasiswa informatika dari Pekalongan yang juga kerja sebagai web developer. Pernah magang di KOMDIGI, part-time di warnet, dan ngerjain beberapa proyek web nyata. Stack utamanya Laravel, WordPress, dan sekarang mulai aktif pakai Next.js.",
     },
     {
-      question: "Kenapa proyeknya relevan untuk perusahaan?",
+      question: "Tech stack apa yang dikuasai?",
       answer:
-        "Proyek yang ditampilkan dekat dengan kebutuhan nyata: company profile, dashboard admin, pengelolaan konten, integrasi API, database, dan support operasional. Ini bukan sekadar latihan UI.",
+        "Untuk backend: PHP dengan Laravel atau CodeIgniter, MySQL, REST API. Frontend: JavaScript, Alpine.js, Tailwind CSS, dan belakangan Next.js sama React. Untuk deployment sudah coba Cloudflare Workers dan VPS Linux.",
     },
     {
-      question: "Apa efek section ini untuk pengunjung?",
+      question: "Bisa diajak freelance atau kerja full-time?",
       answer:
-        "Pengunjung tidak perlu menebak saya bisa membantu di bagian apa. HRD bisa cepat menilai kecocokan, sedangkan calon klien atau kolaborator bisa memahami jenis masalah yang pernah saya tangani.",
+        "Bisa. Untuk freelance bisa langsung kontak lewat form di bawah. Untuk posisi full-time atau magang, lebih enak diskusi dulu soal kecocokan posisi dan lokasi kerja.",
+    },
+    {
+      question: "Jenis proyek apa yang biasa dikerjakan?",
+      answer:
+        "Company profile, dashboard admin, website toko atau UMKM, integrasi payment gateway, dan pengelolaan WordPress. Juga pernah handle setup jaringan dan IT support operasional sehari-hari.",
+    },
+    {
+      question: "Apakah bisa remote atau harus di Pekalongan?",
+      answer:
+        "Bisa remote untuk project-based. Kalau on-site, lebih mudah untuk wilayah Pekalongan dan sekitarnya seperti Batang, Pemalang, Tegal, atau Semarang.",
+    },
+    {
+      question: "Kenapa pilih web developer lokal Pekalongan?",
+      answer:
+        "Komunikasi lebih gampang, bisa meeting langsung, dan lebih paham kebutuhan bisnis lokal seperti UMKM atau toko di daerah. Tidak perlu bayar mahal seperti agensi Jakarta kalau kebutuhannya masih bisa ditangani lokal.",
+    },
+    {
+      question: "Apa yang bisa dilihat dari portofolio ini?",
+      answer:
+        "Proyek nyata yang pernah dikerjakan, bukan cuma latihan. Stack yang dipakai, cara menjelaskan masalah dan solusinya, serta pengalaman kerja dari magang sampai part-time. Cukup untuk gambaran awal sebelum interview.",
     },
   ];
 
@@ -385,12 +474,12 @@ export function buildArticleJsonLd({
     dateModified: modifiedTime || publishedTime,
     author: {
       "@type": "Person",
-      name: "Zee",
+      name: "Dzakri Phalosa Nugroho",
       url: SITE_URL,
     },
     publisher: {
       "@type": "Person",
-      name: "Zee",
+      name: "Dzakri Phalosa Nugroho",
       url: SITE_URL,
     },
     ...(image && {
