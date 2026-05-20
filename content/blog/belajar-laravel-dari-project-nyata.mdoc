@@ -1,0 +1,78 @@
+---
+title: "Belajar Laravel dari project nyata, bukan dari tutorial"
+excerpt: >-
+  Cara belajar Laravel yang paling efektif buat saya ternyata bukan dengan menonton video atau membaca dokumentasi dari awal. Melainkan langsung terjun bikin project company profile yang benar-benar dipakai.
+date: 2026-04-10
+tags:
+  - Laravel
+  - PHP
+  - Web Development
+  - Tutorial
+published: true
+coverImageUrl: null
+---
+
+## Awal yang jujur: saya bukan yang belajar dari nol dulu baru bikin project
+
+Kebanyakan tutorial menyarankan urutan yang sama: pelajari dulu konsepnya, pahami dulu framework-nya, latihan dulu di dummy project, baru kerja di project sungguhan.
+
+Saya tidak melakukan itu.
+
+Waktu pertama kali ngerjain project company profile berbasis Laravel, saya belum benar-benar paham routing, Eloquent, atau Blade sepenuhnya. Tapi project-nya harus jalan, dan deadline-nya nyata.
+
+Hasilnya? Saya belajar Laravel jauh lebih cepat dari yang saya bayangkan sebelumnya.
+
+## Kenapa project nyata lebih efektif dari tutorial
+
+Tutorial punya masalah yang hampir tidak pernah dibahas: skenario di tutorial selalu bersih.
+
+Data-nya rapi, database-nya sudah ada, error tidak pernah muncul dari arah yang tidak terduga. Sementara di project nyata, tiba-tiba ada permintaan dari klien yang tidak ada di rencana awal, struktur database perlu diubah di tengah jalan, atau ada bug yang cuma muncul di production.
+
+Ketidaknyamanan itulah yang justru membuat belajar lebih cepat. Karena otak terpaksa mencari solusi, bukan sekadar mengikuti langkah.
+
+## Apa yang saya bangun
+
+Project pertama saya dengan Laravel adalah company profile untuk PT Lestari Jaya Bangsa. Halamannya tidak rumit: profil perusahaan, layanan, halaman kontak, dan beberapa halaman statis lainnya.
+
+Tapi di balik tampilan yang terlihat sederhana itu, ada beberapa hal teknis yang harus dipelajari:
+
+- Routing dan cara mengorganisir halaman
+- Blade template untuk komponen yang bisa dipakai ulang
+- Eloquent ORM untuk data yang perlu disimpan
+- Konfigurasi environment dan deployment ke shared hosting
+
+Setiap bagian itu saya pelajari tepat saat saya butuh, bukan sebelumnya.
+
+## Cara belajar yang lebih masuk akal
+
+Daripada belajar semua fitur Laravel dari awal, saya memilih pendekatan yang lebih praktis: baca dokumentasi hanya untuk fitur yang sedang saya butuhkan sekarang.
+
+Misalnya, hari ini perlu buat halaman dengan data dinamis dari database. Saya buka bagian Eloquent di dokumentasi Laravel, pelajari yang relevan, coba terapkan, debug jika ada yang salah.
+
+Besoknya, perlu buat form kontak yang mengirim email. Baru saya buka bagian Mail dan Queue.
+
+Hasilnya, saya tidak menghabiskan waktu untuk belajar hal-hal yang belum tentu saya pakai. Dan yang sudah dipelajari, lebih mudah diingat karena langsung dipraktikkan.
+
+## Masalah yang paling sering muncul
+
+Dua masalah yang paling sering saya hadapi waktu awal belajar Laravel:
+
+**Pertama, konfigurasi environment.** File `.env` terlihat sepele, tapi salah konfigurasi di sini bisa membuat seluruh aplikasi tidak berjalan. Database connection, mail driver, app key — semuanya perlu benar.
+
+**Kedua, bingung kapan pakai route web vs API.** Untuk project company profile yang murni menampilkan konten, semua routing bisa pakai web routes. Tapi ketika mulai ada form yang mengirim data, mulai perlu paham CSRF protection dan session.
+
+Keduanya tidak sulit setelah dipahami. Tapi kalau tidak pernah menghadapi masalahnya langsung, sulit untuk benar-benar paham kenapa hal itu penting.
+
+## Yang paling sering dilupakan developer baru
+
+Deployment.
+
+Banyak developer baru yang hebat di localhost tapi bingung saat harus upload ke server. Di shared hosting, ada hal-hal kecil yang perlu diperhatikan: permission folder `storage` dan `cache`, pengaturan `.htaccess`, dan konfigurasi `APP_URL` yang benar.
+
+Laravel punya dokumentasi deployment yang cukup lengkap. Tapi pengalaman melakukan deployment sendiri, dengan segala kesalahan dan proses debuggingnya, adalah yang benar-benar mengajarkan cara kerjanya.
+
+## Penutup
+
+Kalau kamu sedang belajar Laravel, saran saya sederhana: cari project nyata sesegera mungkin. Tidak harus proyek besar. Company profile kecil, blog sederhana, atau halaman portofolio sudah cukup untuk membuat prosesnya lebih bermakna.
+
+Tutorial berguna untuk orientasi awal. Tapi belajar sungguhan terjadi saat kamu menghadapi masalah yang tidak ada di script dan harus mencari solusinya sendiri.

@@ -1,0 +1,99 @@
+---
+title: "Membangun platform PPOB dengan CodeIgniter 4: pilihan teknologi yang sering diremehkan"
+excerpt: >-
+  PPOB bukan sekadar form transaksi. Di baliknya ada integrasi payment gateway, validasi yang ketat, dan alur yang tidak boleh salah. Ini catatan dari proses membangun platform top-up dan pembayaran tagihan pakai CodeIgniter 4.
+date: 2026-03-20
+tags:
+  - CodeIgniter
+  - PHP
+  - Backend
+  - Full Stack
+published: true
+coverImageUrl: null
+---
+
+## Kenapa CodeIgniter, bukan Laravel atau framework lain?
+
+Pertanyaan ini hampir selalu muncul saat saya menyebut CodeIgniter 4 di project.
+
+Jawabannya sederhana: CodeIgniter ringan, tidak opinionated, dan tidak memaksa struktur tertentu. Untuk project PPOB yang perlu dibangun cepat dengan logika bisnis yang cukup spesifik, kebebasan itu adalah keuntungan.
+
+Laravel kuat dan kaya fitur, tapi untuk use case seperti ini, banyak fitur yang tidak akan terpakai. CodeIgniter memberi struktur dasar yang cukup tanpa memaksa cara kerja tertentu.
+
+## Apa itu PPOB dan kenapa menarik secara teknis
+
+PPOB adalah singkatan dari Payment Point Online Bank — sistem untuk memproses pembayaran tagihan, top-up saldo dompet digital, atau isi ulang kredit game secara digital.
+
+Secara teknis, yang menarik dari PPOB adalah alur transaksinya tidak sesimpel form submit biasa. Ada beberapa lapisan:
+
+1. Validasi input dari user (nomor rekening, nomor HP, ID game, dll)
+2. Request ke payment gateway atau API penyedia layanan
+3. Respons yang perlu diproses dan disimpan
+4. Konfirmasi ke user berdasarkan status transaksi
+
+Setiap langkah bisa gagal dengan cara yang berbeda. Dan kegagalan di tengah alur perlu ditangani dengan benar — jangan sampai user dikurangi saldo tapi transaksinya tidak berhasil.
+
+## Integrasi API payment gateway
+
+Bagian paling teknis dari project ini adalah integrasi dengan API penyedia layanan.
+
+API payment gateway biasanya mengembalikan respons dengan kode status yang cukup bervariasi: sukses, pending, gagal, atau kode error spesifik dari penyedia. Setiap kode perlu ditangani dengan cara yang berbeda dan pesan yang tepat ke user.
+
+Di CodeIgniter 4, saya menggunakan `curl` via class bawaan atau library HTTP untuk melakukan request ke API. Responsnya disimpan dan diparsing sebelum diproses lebih lanjut.
+
+Contoh pola yang saya pakai:
+
+```php
+$response = $this->client->request('POST', $endpoint, [
+    'headers' => ['Authorization' => 'Bearer ' . $apiKey],
+    'json' => $payload,
+]);
+
+$data = json_decode($response->getBody(), true);
+
+if ($data['status'] === 'success') {
+    // proses konfirmasi transaksi
+} else {
+    // tangani error berdasarkan kode
+}
+```
+
+Pola ini terlihat sederhana, tapi bagian "tangani error" itu yang membutuhkan waktu paling banyak. Setiap API punya konvensi respons yang berbeda.
+
+## Validasi input yang benar-benar ketat
+
+Di aplikasi biasa, validasi input sering jadi hal kedua. Di PPOB, validasi adalah hal pertama.
+
+Salah satu digit nomor rekening menyebabkan transaksi ke akun yang salah. Nomor HP yang format-nya salah membuat top-up gagal di tengah jalan. Nilai nominal yang tidak valid bisa memicu error di payment gateway.
+
+CodeIgniter 4 punya form validation yang cukup solid. Saya menggunakannya untuk validasi dasar, tapi untuk validasi yang lebih spesifik seperti format nomor meter PLN atau format nomor BPJS, perlu custom rule.
+
+Satu prinsip yang saya pegang: validasi di sisi server selalu wajib. Validasi di sisi client hanya membantu user, bukan menggantikan validasi server.
+
+## Menyimpan riwayat transaksi
+
+Setiap transaksi perlu disimpan, bukan hanya yang berhasil. Transaksi yang gagal juga perlu dicatat, termasuk kode error dan timestamp.
+
+Ini penting untuk dua hal: debugging jika ada laporan masalah dari user, dan reconciliation jika ada pertanyaan tentang status saldo.
+
+Schema database untuk tabel transaksi sebaiknya cukup detail: ID transaksi unik, ID user, jenis layanan, nilai transaksi, status, timestamp request, timestamp respons, dan raw respons dari API jika diperlukan untuk audit.
+
+## Yang membuat project ini lebih rumit dari yang terlihat
+
+Dari luar, PPOB terlihat seperti form transaksi sederhana. Tapi ada beberapa hal yang membuat kompleksitasnya bertambah:
+
+**Timeout dan retry.** Apa yang terjadi kalau request ke payment gateway timeout? Apakah transaksi berhasil di sisi mereka tapi responnya tidak sampai ke kita? Ini perlu mekanisme reconciliation yang jelas.
+
+**Concurrency.** Jika user menekan tombol submit dua kali karena loading lama, apakah akan ada dua transaksi? Perlu mekanisme untuk mencegah duplikasi, misalnya dengan idempotency key.
+
+**Status pending.** Beberapa transaksi tidak langsung sukses atau gagal. Ada status pending yang perlu dicek kembali setelah beberapa waktu.
+
+Semua ini tidak harus diselesaikan sekaligus di versi pertama. Tapi penting untuk sadar bahwa masalah-masalah ini ada dan perlu rencana penanganannya.
+
+## Penutup
+
+CodeIgniter 4 bukan framework yang paling sering dibicarakan di komunitas PHP modern. Tapi untuk project seperti PPOB — yang butuh kontrol penuh atas alur logika, ringan, dan tidak memerlukan fitur framework yang terlalu besar — CodeIgniter adalah pilihan yang solid dan underrated.
+
+Yang lebih penting dari pilihan framework adalah pemahaman tentang alur bisnis yang sedang dibangun. Untuk domain seperti pembayaran dan transaksi, kesalahan kecil dalam implementasi bisa berdampak langsung pada pengguna.
+
+Pelajari domain-nya dulu. Framework menyusul.
