@@ -4,6 +4,8 @@ import type { NextRequest } from "next/server";
 const CANONICAL_HOST = "xenzee.site";
 const LEGACY_MARKETING_PARAMS = new Set(["MA", "ND", "SA"]);
 
+export const runtime = "edge";
+
 export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   let shouldRedirect = false;
