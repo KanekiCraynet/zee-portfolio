@@ -13,25 +13,42 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
       <div className="mx-auto max-w-6xl">
         <FadeIn>
           <SectionHeader
-            label="Pengalaman Kerja"
-            title="Rekam jejak profesional di bidang web development, administrasi, dan IT."
-            description="Setiap entri menyertakan tanggung jawab konkret, teknologi yang digunakan, dan kontribusi nyata selama periode kerja."
+            label="Pengalaman"
+            title="Perjalanan profesional di web dev, administrasi, dan IT"
+            description="Setiap entri menyertakan tanggung jawab konkret, teknologi, dan hasil nyata."
           />
         </FadeIn>
 
-        <div className="mt-12 divide-y divide-border rounded-[2rem] border border-border bg-card/55 backdrop-blur">
+        <div className="mt-12 grid grid-cols-1 gap-6 lg:gap-8">
           {experiences.map((exp, idx) => (
             <FadeIn key={exp.slug} delay={idx * 0.08}>
-              <article className="grid gap-5 p-6 sm:p-8 lg:grid-cols-[14rem_1fr]">
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">{exp.period}</p>
-                  <p className="mt-3 text-sm font-medium text-muted-foreground">{exp.company}</p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-semibold tracking-[-0.03em]">{exp.role}</h3>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">{exp.description}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {exp.technologies.map((tech) => <Badge key={tech} className="rounded-full px-3 py-1">{tech}</Badge>)}
+              <article className="surface-card group relative overflow-hidden rounded-3xl p-6 sm:p-8">
+                <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-accent/10 blur-2xl transition-opacity group-hover:opacity-80" />
+                <div className="relative grid gap-6 lg:grid-cols-[14rem_1fr]">
+                  <div>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      {exp.period}
+                    </div>
+                    <p className="mt-3 text-lg font-semibold text-foreground">{exp.company}</p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-2xl font-semibold tracking-tight">{exp.role}</h3>
+                    <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
+                      {exp.description}
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {exp.technologies.map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="outline"
+                          className="rounded-lg border border-border/70 bg-background/50 px-3 py-1 text-sm"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </article>

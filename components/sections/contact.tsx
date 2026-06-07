@@ -55,16 +55,23 @@ export function ContactSection({ config }: ContactSectionProps) {
   return (
     <section id="contact" className="px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <FadeIn>
             <SectionHeader
-              label="Hubungi Saya"
-              title="Terbuka untuk diskusi peluang kerja dan kolaborasi profesional."
-              description="Kirim pesan melalui formulir di bawah, atau hubungi langsung melalui email dan media sosial yang tersedia."
+              label="Kontak"
+              title="Terbuka untuk peluang kerja dan kolaborasi"
+              description="Kirim pesan via form, atau hubungi langsung melalui email dan media sosial."
             />
             <div className="mt-8 flex flex-wrap gap-3">
               {socialLinks.map((social) => (
-                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-card/70 px-4 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:text-accent" aria-label={social.label}>
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-card/70 px-4 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:bg-card hover:text-accent"
+                  aria-label={social.label}
+                >
                   <social.icon className="h-4 w-4" />
                   {social.label}
                 </a>
@@ -72,26 +79,65 @@ export function ContactSection({ config }: ContactSectionProps) {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.12}>
-            <form onSubmit={handleSubmit} className="surface-card rounded-[2rem] p-6 sm:p-8">
+          <FadeIn delay={0.1}>
+            <form onSubmit={handleSubmit} className="surface-card rounded-3xl p-8">
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <Field label="Nama" id="name" placeholder="Nama Anda" />
                 <Field label="Email" id="email" type="email" placeholder="you@example.com" />
               </div>
+
               <div className="mt-5">
-                <label htmlFor="message" className="mb-2 block text-sm font-semibold">Pesan</label>
-                <textarea id="message" name="message" required rows={5} maxLength={2000} placeholder="Ceritakan kebutuhan atau pertanyaan Anda..." className="min-h-36 w-full resize-none rounded-2xl border border-border bg-background/60 px-4 py-3 text-sm transition-colors placeholder:text-muted-foreground/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-ring/30" />
+                <label htmlFor="message" className="mb-2 block text-sm font-semibold text-foreground">
+                  Pesan
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={6}
+                  maxLength={2000}
+                  placeholder="Ceritakan kebutuhan atau pertanyaan Anda..."
+                  className="min-h-40 w-full resize-none rounded-2xl border border-border bg-background/60 px-4 py-3 text-sm leading-6 text-foreground transition-colors placeholder:text-muted-foreground/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-ring/30"
+                />
               </div>
 
-              <button type="submit" disabled={formState === "loading" || formState === "success"} className={cn("mt-6 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring")}>
-                {formState === "loading" && <><Loader2 className="h-4 w-4 animate-spin" /> Mengirim Pesan...</>}
-                {formState === "idle" && <><Send className="h-4 w-4" /> Kirim Pesan</>}
-                {formState === "success" && <><CheckCircle className="h-4 w-4" /> Pesan Berhasil Dikirim!</>}
-                {formState === "error" && <><AlertCircle className="h-4 w-4" /> Kirim Ulang</>}
+              <button
+                type="submit"
+                disabled={formState === "loading" || formState === "success"}
+                className={cn(
+                  "mt-6 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                )}
+              >
+                {formState === "loading" && (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" /> Mengirim...
+                  </>
+                )}
+                {formState === "idle" && (
+                  <>
+                    <Send className="h-4 w-4" /> Kirim Pesan
+                  </>
+                )}
+                {formState === "success" && (
+                  <>
+                    <CheckCircle className="h-4 w-4" /> Berhasil Terkirim!
+                  </>
+                )}
+                {formState === "error" && (
+                  <>
+                    <AlertCircle className="h-4 w-4" /> Kirim Ulang
+                  </>
+                )}
               </button>
 
-              {formState === "error" && errorMessage && <p className="mt-4 text-center text-sm text-red-500 dark:text-red-400">{errorMessage}</p>}
-              {formState === "success" && <p className="mt-4 text-center text-sm text-emerald-600 dark:text-emerald-400">Terima kasih telah menghubungi saya. Saya akan merespons secepatnya.</p>}
+              {formState === "error" && errorMessage && (
+                <p className="mt-4 text-center text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
+              )}
+              {formState === "success" && (
+                <p className="mt-4 text-center text-sm text-emerald-600 dark:text-emerald-400">
+                  Terima kasih! Saya akan merespons secepatnya.
+                </p>
+              )}
             </form>
           </FadeIn>
         </div>
@@ -103,8 +149,18 @@ export function ContactSection({ config }: ContactSectionProps) {
 function Field({ label, id, type = "text", placeholder }: { label: string; id: string; type?: string; placeholder: string }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-semibold">{label}</label>
-      <input type={type} id={id} name={id} required maxLength={type === "email" ? 254 : 100} placeholder={placeholder} className="h-12 w-full rounded-2xl border border-border bg-background/60 px-4 text-sm transition-colors placeholder:text-muted-foreground/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-ring/30" />
+      <label htmlFor={id} className="mb-2 block text-sm font-semibold text-foreground">
+        {label}
+      </label>
+      <input
+        type={type}
+        id={id}
+        name={id}
+        required
+        maxLength={type === "email" ? 254 : 100}
+        placeholder={placeholder}
+        className="h-12 w-full rounded-2xl border border-border bg-background/60 px-4 text-sm text-foreground transition-colors placeholder:text-muted-foreground/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-ring/30"
+      />
     </div>
   );
 }
