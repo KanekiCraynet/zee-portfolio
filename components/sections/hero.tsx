@@ -31,8 +31,11 @@ export function HeroSection({ config }: HeroSectionProps) {
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-end gap-12 lg:grid-cols-12">
         <motion.div className="lg:col-span-7" variants={container} initial="hidden" animate="show">
           <motion.div variants={item}>
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
               Terbuka untuk Peluang Baru
             </span>
           </motion.div>

@@ -9,6 +9,16 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "routes": [
+    {
+      "pattern": "xenzee.site/*",
+      "zone_name": "xenzee.site"
+    },
+    {
+      "pattern": "www.xenzee.site/*",
+      "zone_name": "xenzee.site"
+    }
+  ],
   "vars": {
     "NEXT_PUBLIC_GITHUB_OWNER": "KanekiCraynet",
     "NEXT_PUBLIC_GITHUB_REPO": "zee-portfolio"

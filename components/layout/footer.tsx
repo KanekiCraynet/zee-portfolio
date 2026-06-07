@@ -76,13 +76,16 @@ export async function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} {config.name}. Seluruh hak dilindungi.
           </p>
-          <p className="text-sm text-muted-foreground">
-            Dibangun dengan Next.js &amp; Tailwind CSS · Pekalongan, Jawa Tengah
-          </p>
+          <div className="flex items-center gap-3 text-sm text-muted-foreground">
+            <p>Dibangun dengan Next.js &amp; Tailwind CSS · Pekalongan, Jawa Tengah</p>
+            <Link href="#top" className="rounded-full border border-border px-3 py-1.5 text-xs font-medium transition-colors hover:border-accent hover:text-accent">
+              Kembali ke atas
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
