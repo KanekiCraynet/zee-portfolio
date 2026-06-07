@@ -8,7 +8,13 @@ import {
   escapeHtml,
 } from "@/lib/validation";
 
-const resend = new Resend(env.RESEND_API_KEY);
+function getResend(): Resend {
+  const key = env.RESEND_API_KEY;
+  if (!key) {
+    throw new Error("Resend API key not configured");
+  }
+  return new Resend(key);
+}
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
@@ -108,6 +114,8 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    const resend = getResend();
 
     const { data, error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
