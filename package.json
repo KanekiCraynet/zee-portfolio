@@ -2,6 +2,7 @@
   "name": "zee-portfolio",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.26.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,7 +20,6 @@
     "@sentry/nextjs": "^10.56.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "eslint-plugin-unused-imports": "^4.4.1",
     "lucide-react": "^0.577.0",
     "motion": "^12.35.0",
     "next": "16.2.6",
@@ -39,6 +39,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "eslint-plugin-unused-imports": "^4.4.1",
     "tailwindcss": "^4",
     "typescript": "^5",
     "wrangler": "^4.83.0"
