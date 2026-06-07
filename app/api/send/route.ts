@@ -1,17 +1,32 @@
 import { Resend } from "resend";
+import { env } from "@/lib/env";
+import {
+  EMAIL_REGEX,
+  MAX_EMAIL_LENGTH,
+  MAX_MESSAGE_LENGTH,
+  MAX_NAME_LENGTH,
+  escapeHtml,
+} from "@/lib/validation";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(env.RESEND_API_KEY);
 
-// ── Rate Limiting ────────────────────────────────────────────────────────────
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const RATE_LIMIT_MAX = 5;
 
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
-const RATE_LIMIT_MAX = 5; // 5 requests per window
+type RateLimitEntry = {
+  count: number;
+  resetAt: number;
+};
 
-// Per-isolate only — does not persist across Cloudflare Workers instances.
-// Acceptable for low-traffic portfolio; migrate to KV/Upstash for real protection.
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const rateLimitMap = new Map<string, RateLimitEntry>();
+let cleanupTimerStarted = false;
 
-function isRateLimited(ip: string): boolean {
+function getClientIp(req: Request): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  return forwarded?.split(",")[0]?.trim() || "unknown";
+}
+
+function isRateLimitedInMemory(ip: string): boolean {
   const now = Date.now();
   const entry = rateLimitMap.get(ip);
 
@@ -24,30 +39,37 @@ function isRateLimited(ip: string): boolean {
   return entry.count > RATE_LIMIT_MAX;
 }
 
-// Periodically clean up expired entries to prevent memory leaks
-setInterval(() => {
+function cleanupRateLimits() {
   const now = Date.now();
+
   for (const [ip, entry] of rateLimitMap) {
-    if (now > entry.resetAt) rateLimitMap.delete(ip);
+    if (now > entry.resetAt) {
+      rateLimitMap.delete(ip);
+    }
   }
-}, 10 * 60 * 1000); // Clean every 10 minutes
 
-// ── Validation ───────────────────────────────────────────────────────────────
+  setTimeout(cleanupRateLimits, 10 * 60 * 1000);
+}
 
-const MAX_NAME_LENGTH = 100;
-const MAX_EMAIL_LENGTH = 254; // RFC 5321
-const MAX_MESSAGE_LENGTH = 2000;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function ensureCleanupTimer() {
+  if (cleanupTimerStarted) {
+    return;
+  }
 
-// ── Handler ──────────────────────────────────────────────────────────────────
+  cleanupTimerStarted = true;
+  setTimeout(cleanupRateLimits, 10 * 60 * 1000);
+}
+
+async function isRateLimited(ip: string): Promise<boolean> {
+  ensureCleanupTimer();
+  return isRateLimitedInMemory(ip);
+}
 
 export async function POST(req: Request) {
   try {
-    // Rate limit by IP
-    const forwarded = req.headers.get("x-forwarded-for");
-    const ip = forwarded?.split(",")[0]?.trim() || "unknown";
+    const ip = getClientIp(req);
 
-    if (isRateLimited(ip)) {
+    if (await isRateLimited(ip)) {
       return Response.json(
         { error: "Too many requests. Please try again later." },
         { status: 429 }
@@ -59,7 +81,6 @@ export async function POST(req: Request) {
     const email = typeof body.email === "string" ? body.email.trim() : "";
     const message = typeof body.message === "string" ? body.message.trim() : "";
 
-    // Required fields
     if (!name || !email || !message) {
       return Response.json(
         { error: "Name, email, and message are required." },
@@ -67,7 +88,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Length limits
     if (name.length > MAX_NAME_LENGTH) {
       return Response.json(
         { error: `Name must be ${MAX_NAME_LENGTH} characters or fewer.` },
@@ -75,7 +95,7 @@ export async function POST(req: Request) {
       );
     }
 
-    if (email.length > MAX_EMAIL_LENGTH) {
+    if (email.length > MAX_EMAIL_LENGTH || !EMAIL_REGEX.test(email)) {
       return Response.json(
         { error: "Invalid email address." },
         { status: 400 }
@@ -89,17 +109,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Email format
-    if (!EMAIL_REGEX.test(email)) {
-      return Response.json(
-        { error: "Invalid email address." },
-        { status: 400 }
-      );
-    }
-
     const { data, error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: [process.env.CONTACT_EMAIL || "hello@xenzee.site"],
+      to: [env.CONTACT_EMAIL || "hello@xenzee.site"],
       replyTo: email,
       subject: `Portfolio Contact: ${name}`,
       html: `
@@ -133,15 +145,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-}
-
-function escapeHtml(text: string): string {
-  const map: Record<string, string> = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;",
-  };
-  return text.replace(/[&<>"']/g, (char) => map[char] || char);
 }

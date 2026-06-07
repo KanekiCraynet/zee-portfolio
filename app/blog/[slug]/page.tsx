@@ -7,6 +7,7 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { Badge } from "@/components/ui/badge";
 import { getBlogPost, getBlogPostSlugs } from "@/lib/keystatic";
 import { buildArticleMetadata, buildArticleJsonLd } from "@/lib/seo";
+import { formatDate } from "@/lib/utils";
 
 // ── Static params for SSG ────────────────────────────────────────────────────
 
@@ -141,11 +142,7 @@ export default async function BlogPostPage({
               <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="h-3.5 w-3.5" />
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  {formatDate(post.date)}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Clock className="h-3.5 w-3.5" />

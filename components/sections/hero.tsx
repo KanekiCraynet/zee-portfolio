@@ -73,7 +73,16 @@ export function HeroSection({ config }: HeroSectionProps) {
             </div>
             <div className="overflow-hidden rounded-[1.45rem] bg-muted">
               {config.avatarUrl ? (
-                <Image src={config.avatarUrl} alt={`Foto ${config.name}`} width={520} height={620} priority className="h-[28rem] w-full object-cover object-center grayscale-[12%]" />
+                <Image
+                  src={config.avatarUrl}
+                  alt={`Foto ${config.name}`}
+                  width={520}
+                  height={620}
+                  priority
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MicgaGVpZ2h0PSc2Micgdmlld0JveD0nMCAwIDUyIDYyJz48cmVjdCB3aWR0aD0nNTInIGhlaWdodD0nNjInIGZpbGw9JyMxNDE0MTcnLz48L3N2Zz4="
+                  className="h-[28rem] w-full object-cover object-center grayscale-[12%]"
+                />
               ) : (
                 <div className="flex h-[28rem] items-center justify-center text-7xl font-semibold">D</div>
               )}
