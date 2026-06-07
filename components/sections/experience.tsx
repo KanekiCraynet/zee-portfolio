@@ -1,5 +1,3 @@
-"use client";
-
 import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Badge } from "@/components/ui/badge";
@@ -20,8 +18,8 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
         </FadeIn>
 
         <div className="mt-12 grid grid-cols-1 gap-6 lg:gap-8">
-          {experiences.map((exp, idx) => (
-            <FadeIn key={exp.slug} delay={idx * 0.08}>
+          {experiences.map((exp) => (
+            <FadeIn key={exp.slug}>
               <article className="surface-card group relative overflow-hidden rounded-3xl p-6 sm:p-8">
                 <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-accent/10 blur-2xl transition-opacity group-hover:opacity-80" />
                 <div className="relative grid gap-6 lg:grid-cols-[14rem_1fr]">

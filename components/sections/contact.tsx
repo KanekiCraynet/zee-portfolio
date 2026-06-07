@@ -79,7 +79,7 @@ export function ContactSection({ config }: ContactSectionProps) {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.1}>
+          <FadeIn>
             <form onSubmit={handleSubmit} className="surface-card rounded-3xl p-8">
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <Field label="Nama" id="name" placeholder="Nama Anda" />
@@ -108,26 +108,10 @@ export function ContactSection({ config }: ContactSectionProps) {
                   "mt-6 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 )}
               >
-                {formState === "loading" && (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" /> Mengirim...
-                  </>
-                )}
-                {formState === "idle" && (
-                  <>
-                    <Send className="h-4 w-4" /> Kirim Pesan
-                  </>
-                )}
-                {formState === "success" && (
-                  <>
-                    <CheckCircle className="h-4 w-4" /> Berhasil Terkirim!
-                  </>
-                )}
-                {formState === "error" && (
-                  <>
-                    <AlertCircle className="h-4 w-4" /> Kirim Ulang
-                  </>
-                )}
+                {formState === "loading" && <><Loader2 className="h-4 w-4 animate-spin" /> Mengirim...</>}
+                {formState === "idle" && <><Send className="h-4 w-4" /> Kirim Pesan</>}
+                {formState === "success" && <><CheckCircle className="h-4 w-4" /> Berhasil Terkirim!</>}
+                {formState === "error" && <><AlertCircle className="h-4 w-4" /> Kirim Ulang</>}
               </button>
 
               {formState === "error" && errorMessage && (

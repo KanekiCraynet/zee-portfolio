@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { ArrowRight, FileDown, Github, Linkedin, Instagram, Mail, MapPin } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";

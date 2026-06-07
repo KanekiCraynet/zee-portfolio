@@ -1,5 +1,3 @@
-"use client";
-
 import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeader } from "@/components/ui/section-header";
 import { MapPin, Mail, Briefcase, Languages, GraduationCap, Calendar } from "lucide-react";
@@ -22,11 +20,11 @@ export function AboutSection({ config }: AboutSectionProps) {
           <FadeIn className="lg:col-span-5">
             <SectionHeader 
               label="Tentang Saya" 
-              title="Pengembang web yang memahami kebutuhan teknis dan operasional." 
+              title="Pengembang web yang memahami kebutuhan teknis dan operasional" 
             />
           </FadeIn>
 
-          <FadeIn delay={0.1} className="lg:col-span-7">
+          <FadeIn className="lg:col-span-7">
             <div className="surface-card rounded-3xl p-8">
               <p className="text-lg leading-relaxed text-muted-foreground">
                 {config.longBio}
@@ -34,20 +32,18 @@ export function AboutSection({ config }: AboutSectionProps) {
 
               <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {infoItems.map((item, idx) => (
-                  <FadeIn key={item.label} delay={0.15 + idx * 0.05}>
-                    <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/30 p-5 transition-all hover:border-accent/30 hover:bg-card/50">
-                      <div className="flex items-start gap-3">
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
-                          <item.icon className="h-4 w-4" strokeWidth={2.5} />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                            {item.label}
-                          </p>
-                          <p className="break-words text-sm font-medium leading-relaxed text-foreground">
-                            {item.value}
-                          </p>
-                        </div>
+                  <FadeIn key={item.label} className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/30 p-5 transition-all hover:border-accent/30 hover:bg-card/50">
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
+                        <item.icon className="h-4 w-4" strokeWidth={2.5} />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                          {item.label}
+                        </p>
+                        <p className="break-words text-sm font-medium leading-relaxed text-foreground">
+                          {item.value}
+                        </p>
                       </div>
                     </div>
                   </FadeIn>
@@ -57,7 +53,7 @@ export function AboutSection({ config }: AboutSectionProps) {
           </FadeIn>
         </div>
 
-        <FadeIn delay={0.25}>
+        <FadeIn>
           <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card to-muted/30 shadow-xl">
             <div className="p-8 sm:p-10">
               <div className="grid gap-8 md:grid-cols-[auto_1fr] md:items-start">

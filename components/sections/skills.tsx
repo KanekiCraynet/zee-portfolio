@@ -1,5 +1,3 @@
-"use client";
-
 import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeader } from "@/components/ui/section-header";
 import { iconMap } from "@/lib/icons";
@@ -21,8 +19,8 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
           </FadeIn>
 
           <div className="grid grid-cols-1 gap-5 lg:col-span-8 sm:grid-cols-2">
-            {categories.map((category, idx) => (
-              <FadeIn key={category.category} delay={idx * 0.08}>
+            {categories.map((category) => (
+              <FadeIn key={category.category}>
                 <div className="surface-card h-full rounded-[1.75rem] p-6">
                   <h3 className="mb-5 flex items-center gap-3 text-base font-semibold text-foreground">
                     <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent/10 text-accent">
