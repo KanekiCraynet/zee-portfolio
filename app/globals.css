@@ -2,12 +2,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================
+   VERCEL-STYLE DESIGN SYSTEM
+   Shadow-as-border technique throughout
+   ============================================ */
+
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -17,50 +22,122 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-ring: var(--ring);
+  --color-border: var(--border);
+  
+  /* Typography - Geist font family */
   --font-sans: var(--font-geist-sans), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  
+  /* Vercel-style radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
 }
+
+/* ============================================
+   1. ROOT VARIABLES - LIGHT MODE
+   Vercel palette: near-black #171717, white #ffffff
+   ============================================ */
 
 :root {
-  --background:           #FAFAFA;
-  --foreground:           #18181B;
-  --muted:                #F4F4F5;
-  --muted-foreground:     #71717A;
-  --border:               #D4D4D8;
-  --primary:              #27272A;
-  --primary-foreground:   #FAFAFA;
-  --secondary:            #F0F0F3;
-  --secondary-foreground: #1E293B;
+  /* Core colors */
+  --background:           #FFFFFF;
+  --foreground:           #171717;
+  --muted:                #FAFAFA;
+  --muted-foreground:     #666666;
+  
+  /* Primary - Near black */
+  --primary:              #171717;
+  --primary-foreground:   #FFFFFF;
+  
+  /* Secondary - Subtle gray */
+  --secondary:            #F5F5F5;
+  --secondary-foreground: #171717;
+  
+  /* Accent - Amber brand color */
   --accent:               #D97706;
-  --accent-foreground:    #2A1704;
+  --accent-foreground:    #FFFFFF;
+  
+  /* Cards & surfaces */
   --card:                 #FFFFFF;
-  --card-foreground:      #18181B;
-  --ring:                 #D97706;
-  --radius:               1rem;
-  --surface-subtle:       color-mix(in srgb, var(--muted) 60%, transparent);
+  --card-foreground:      #171717;
+  
+  /* Borders - replaced by shadows, kept for compatibility */
+  --border:               rgba(0, 0, 0, 0.08);
+  
+  /* Focus ring - Vercel blue */
+  --ring:                 hsla(212, 100%, 48%, 1);
+  
+  /* Surface treatments */
+  --surface-subtle:       #FAFAFA;
+  --surface-hover:        #F5F5F5;
+  
+  /* Shadow tokens */
+  --shadow-border:        0 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-border-hover:  0 0 0 1px rgba(0, 0, 0, 0.12);
+  --shadow-sm:            0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md:            0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg:            0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl:            0 16px 48px rgba(0, 0, 0, 0.16);
+  --shadow-card:          0 0 0 1px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover:    0 0 0 1px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08), 0 8px 32px rgba(0, 0, 0, 0.04);
 }
+
+/* ============================================
+   2. DARK MODE VARIABLES
+   ============================================ */
 
 .dark {
-  --background:           #09090B;
-  --foreground:           #F4F4F5;
-  --muted:                #18181B;
-  --muted-foreground:     #A1A1AA;
-  --border:               #27272A;
-  --primary:              #E4E4E7;
-  --primary-foreground:   #09090B;
-  --secondary:            #18181B;
-  --secondary-foreground: #C7D2FE;
+  --background:           #000000;
+  --foreground:           #EDEDED;
+  --muted:                #0A0A0A;
+  --muted-foreground:     #888888;
+  
+  /* Primary - Light in dark mode */
+  --primary:              #EDEDED;
+  --primary-foreground:   #000000;
+  
+  /* Secondary - Subtle dark */
+  --secondary:            #111111;
+  --secondary-foreground: #EDEDED;
+  
+  /* Accent - Brighter amber for dark mode */
   --accent:               #F59E0B;
-  --accent-foreground:    #1F1303;
-  --card:                 #121214;
-  --card-foreground:      #F4F4F5;
-  --ring:                 #F59E0B;
-  --surface-subtle:       color-mix(in srgb, var(--muted) 60%, transparent);
+  --accent-foreground:    #000000;
+  
+  /* Cards & surfaces */
+  --card:                 #0A0A0A;
+  --card-foreground:      #EDEDED;
+  
+  /* Borders */
+  --border:               rgba(255, 255, 255, 0.08);
+  
+  /* Focus ring */
+  --ring:                 hsla(212, 100%, 58%, 1);
+  
+  /* Surface treatments */
+  --surface-subtle:       #0A0A0A;
+  --surface-hover:        #111111;
+  
+  /* Shadow tokens - dark mode */
+  --shadow-border:        0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-border-hover:  0 0 0 1px rgba(255, 255, 255, 0.1);
+  --shadow-sm:            0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md:            0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg:            0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-xl:            0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-card:          0 0 0 1px rgba(255, 255, 255, 0.06), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover:    0 0 0 1px rgba(255, 255, 255, 0.1), 0 4px 16px rgba(0, 0, 0, 0.4), 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
+/* ============================================
+   3. BASE STYLES
+   ============================================ */
+
 * {
-  border-color: var(--border);
-  outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+  box-sizing: border-box;
 }
 
 *:focus-visible {
@@ -68,45 +145,91 @@
   outline-offset: 2px;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 body {
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--accent) 12%, transparent), transparent),
-    linear-gradient(180deg, var(--background), color-mix(in srgb, var(--background) 92%, var(--muted)) 50rem);
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
 
+/* Subtle dot grid background */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.2;
-  background-image: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--foreground) 8%, transparent) 1px, transparent 0);
-  background-size: 48px 48px;
+  opacity: 0.15;
+  background-image: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 0);
+  background-size: 32px 32px;
   mask-image: linear-gradient(to bottom, transparent, black 10%, black 70%, transparent);
 }
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--muted-foreground) 45%, transparent); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: var(--muted-foreground); }
+/* ============================================
+   4. TYPOGRAPHY - Vercel-style letter-spacing
+   Three weights: 400 (body), 500 (UI), 600 (headings)
+   ============================================ */
 
-::selection { background-color: var(--accent); color: var(--accent-foreground); }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--foreground);
 }
 
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  letter-spacing: -0.02em;
+}
+
+h4 {
+  font-size: 1.25rem;
+  letter-spacing: -0.015em;
+}
+
+p {
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+
+/* Display text - Extra large with tight spacing */
+.display-text {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+/* Kicker - Small mono uppercase label */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Gradient text effect */
 .gradient-text {
   color: var(--foreground);
   background: linear-gradient(135deg, var(--foreground) 0%, color-mix(in srgb, var(--foreground) 70%, var(--accent)) 100%);
@@ -115,63 +238,403 @@ body::before {
   background-clip: text;
 }
 
-.dark .gradient-text {
-  background: linear-gradient(135deg, var(--foreground) 0%, color-mix(in srgb, var(--foreground) 70%, var(--accent)) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Selection */
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
 }
 
-.primary-glow { box-shadow: 0 18px 48px color-mix(in srgb, var(--accent) 20%, transparent); }
-
-.surface-card {
-  background: color-mix(in srgb, var(--card) 80%, transparent);
-  border: 1px solid var(--border);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--foreground) 6%, transparent), 0 8px 32px color-mix(in srgb, var(--foreground) 3%, transparent);
-  backdrop-filter: blur(24px);
-  transition:
-    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.3s ease;
+/* Scrollbar - minimal */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-.surface-card:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 2px 8px color-mix(in srgb, var(--accent) 12%, transparent),
-    0 16px 48px color-mix(in srgb, var(--foreground) 5%, transparent);
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.kicker {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--foreground) 20%, transparent);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--foreground) 40%, transparent);
+}
+
+/* ============================================
+   5. COMPONENT STYLES
+   Buttons, cards, badges - NO traditional borders
+   ============================================ */
+
+/* Primary Button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-border);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-border-hover);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-border);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover);
+  box-shadow: var(--shadow-border-hover);
+}
+
+/* Accent Button */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-accent:hover {
+  filter: brightness(1.1);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Pill Badge - Vercel style */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 999px;
+  box-shadow: var(--shadow-border);
+}
+
+.badge-accent {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
   color: var(--accent);
 }
 
+/* ============================================
+   6. SURFACE TREATMENTS - Shadow-as-border
+   ============================================ */
+
+/* Card surface - multi-layer shadow stack */
+.surface-card {
+  background: var(--card);
+  color: var(--card-foreground);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.surface-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Elevated card - more depth */
+.surface-elevated {
+  background: var(--card);
+  color: var(--card-foreground);
+  border-radius: var(--radius-lg);
+  box-shadow: 
+    var(--shadow-border),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.surface-elevated:hover {
+  box-shadow: 
+    var(--shadow-border-hover),
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 16px 48px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+/* Subtle surface - minimal shadow */
+.surface-subtle {
+  background: var(--surface-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-border);
+}
+
+/* Interactive surface */
+.surface-interactive {
+  background: var(--card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-border);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.surface-interactive:hover {
+  background: var(--surface-hover);
+  box-shadow: var(--shadow-border-hover);
+}
+
+/* Primary glow - for hero elements */
+.primary-glow {
+  box-shadow: 
+    0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent),
+    0 8px 24px color-mix(in srgb, var(--accent) 20%, transparent),
+    0 16px 48px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* Divider - using shadow instead of border */
+.divider {
+  height: 1px;
+  background: transparent;
+  box-shadow: 0 0 0 0.5px var(--border);
+}
+
+/* ============================================
+   7. PROSE STYLES
+   ============================================ */
+
 .prose {
   max-width: 70ch;
-  color: var(--card-foreground);
-  line-height: 1.8;
+  color: var(--muted-foreground);
+  line-height: 1.75;
 }
-.prose h1 { font-size: 2em; font-weight: 800; line-height: 1.15; margin-top: 2em; margin-bottom: 0.25em; letter-spacing: -0.02em; color: var(--foreground); }
-.prose h2 { font-size: 1.5em; font-weight: 700; line-height: 1.25; margin-top: 1.75em; margin-bottom: 0.5em; letter-spacing: -0.015em; color: var(--foreground); }
-.prose h3 { font-size: 1.2em; font-weight: 600; line-height: 1.35; margin-top: 1.5em; margin-bottom: 0.4em; color: var(--foreground); }
-.prose p { margin-top: 1em; margin-bottom: 1em; color: var(--muted-foreground); line-height: 1.75; }
-.prose strong { font-weight: 700; color: var(--foreground); }
-.prose em { font-style: italic; }
-.prose ul, .prose ol { margin-top: 1em; margin-bottom: 1em; padding-left: 1.75em; color: var(--muted-foreground); }
-.prose ul > li { list-style-type: disc; }
-.prose ol > li { list-style-type: decimal; }
-.prose li { margin-top: 0.35em; margin-bottom: 0.35em; line-height: 1.7; }
-.prose code:not(pre code) { font-family: var(--font-mono); font-size: 0.875em; background: var(--secondary); color: var(--primary); padding: 0.15em 0.45em; border-radius: 0.3rem; border: 1px solid var(--border); font-weight: 500; }
-.prose pre { background: var(--muted); border: 1px solid var(--border); padding: 1em 1.25em; border-radius: 0.75rem; overflow-x: auto; margin: 1.5em 0; }
-.prose pre code { font-family: var(--font-mono); font-size: 0.875em; background: none; padding: 0; border: none; color: var(--foreground); font-weight: 400; }
-.prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: opacity 0.15s; }
-.prose a:hover { opacity: 0.75; }
-.prose blockquote { border-left: 3px solid var(--accent); padding: 0.5em 1.25em; margin: 1.5em 0; background: var(--secondary); border-radius: 0 0.5rem 0.5rem 0; color: var(--secondary-foreground); font-style: italic; }
-.prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; }
-.prose img { border-radius: 0.75rem; border: 1px solid var(--border); margin: 1.5em auto; max-width: 100%; }
-.prose table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.9em; }
-.prose th, .prose td { padding: 0.6em 1em; border: 1px solid var(--border); text-align: left; }
-.prose th { background: var(--muted); font-weight: 600; color: var(--foreground); }
+
+.prose h1 {
+  font-size: 2em;
+  font-weight: 600;
+  line-height: 1.15;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.prose h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 1.75em;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.015em;
+  color: var(--foreground);
+}
+
+.prose h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+.prose p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: opacity 0.15s ease;
+}
+
+.prose a:hover {
+  opacity: 0.8;
+}
+
+.prose ul, .prose ol {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.prose ul > li {
+  list-style-type: disc;
+}
+
+.prose ol > li {
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  line-height: 1.7;
+}
+
+/* Inline code - shadow instead of border */
+.prose code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: 500;
+  background: var(--secondary);
+  color: var(--foreground);
+  padding: 0.125em 0.375em;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-border);
+}
+
+/* Code block */
+.prose pre {
+  background: var(--muted);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  margin: 1.5em 0;
+  box-shadow: var(--shadow-border);
+}
+
+.prose pre code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: 400;
+  background: none;
+  color: var(--foreground);
+}
+
+/* Blockquote - accent border via shadow */
+.prose blockquote {
+  padding: 0.75em 1.25em;
+  margin: 1.5em 0;
+  background: var(--secondary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  box-shadow: inset 3px 0 0 var(--accent);
+  font-style: italic;
+  color: var(--secondary-foreground);
+}
+
+/* Table - shadow borders */
+.prose table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5em 0;
+  font-size: 0.9em;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-border);
+}
+
+.prose th, .prose td {
+  padding: 0.75em 1em;
+  text-align: left;
+}
+
+.prose th {
+  background: var(--muted);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.prose tr {
+  box-shadow: inset 0 -1px 0 var(--border);
+}
+
+.prose tr:last-child {
+  box-shadow: none;
+}
+
+/* Horizontal rule */
+.prose hr {
+  height: 1px;
+  border: none;
+  margin: 2.5em 0;
+  box-shadow: 0 0 0 0.5px var(--border);
+}
+
+/* Images */
+.prose img {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  margin: 1.5em auto;
+  max-width: 100%;
+}
+
+/* ============================================
+   8. UTILITIES
+   ============================================ */
+
+/* Text utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Shadow utilities */
+.shadow-border {
+  box-shadow: var(--shadow-border);
+}
+
+.shadow-border-hover {
+  box-shadow: var(--shadow-border-hover);
+}
+
+/* Transition utilities */
+.transition-shadow {
+  transition: box-shadow 0.15s ease;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
