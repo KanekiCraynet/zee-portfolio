@@ -47,8 +47,3 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
-      - name: Bind CONTACT_EMAIL as Worker secret
-        run: echo "$CONTACT_EMAIL" | npx wrangler secret put CONTACT_EMAIL
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
