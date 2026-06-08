@@ -81,6 +81,7 @@ export interface BlogPostWithContent extends BlogPost {
   content: () => Promise<any>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type BlogEntry = {
   slug: string;
   entry: {

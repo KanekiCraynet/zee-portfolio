@@ -90,6 +90,7 @@ export interface BlogPostMeta {
 }
 `;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function slugify(str: string): string {
   return str
     .toLowerCase()
