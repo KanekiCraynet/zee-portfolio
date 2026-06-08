@@ -123,8 +123,8 @@ export async function POST(req: Request) {
     const resend = getResend();
 
     const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
-      to: [env.CONTACT_EMAIL || "hello@xenzee.site"],
+      from: "Portfolio Contact <contact@xenzee.site>",
+      to: [env.CONTACT_EMAIL || "admin@xenzee.site"],
       replyTo: email,
       subject: `Portfolio Contact: ${name}`,
       html: `
