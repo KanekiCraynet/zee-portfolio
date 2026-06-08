@@ -66,14 +66,23 @@ const blogTagOptions = [
   { label: "Indonesia", value: "Indonesia" },
 ];
 
+const githubOwner = process.env.NEXT_PUBLIC_GITHUB_OWNER;
+const githubRepo = process.env.NEXT_PUBLIC_GITHUB_REPO;
+
+if (process.env.NODE_ENV === "production" && (!githubOwner || !githubRepo)) {
+  throw new Error(
+    "Keystatic GitHub storage requires NEXT_PUBLIC_GITHUB_OWNER and NEXT_PUBLIC_GITHUB_REPO in production"
+  );
+}
+
 export default config({
   storage:
     process.env.NODE_ENV === "production"
       ? {
           kind: "github",
           repo: {
-            owner: process.env.NEXT_PUBLIC_GITHUB_OWNER ?? "zee",
-            name: process.env.NEXT_PUBLIC_GITHUB_REPO ?? "zee-portfolio",
+            owner: githubOwner as string,
+            name: githubRepo as string,
           },
         }
       : { kind: "local" },
