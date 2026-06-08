@@ -69,23 +69,21 @@ const blogTagOptions = [
 const githubOwner = process.env.NEXT_PUBLIC_GITHUB_OWNER;
 const githubRepo = process.env.NEXT_PUBLIC_GITHUB_REPO;
 
-if (process.env.NODE_ENV === "production" && (!githubOwner || !githubRepo)) {
-  throw new Error(
-    "Keystatic GitHub storage requires NEXT_PUBLIC_GITHUB_OWNER and NEXT_PUBLIC_GITHUB_REPO in production"
-  );
-}
+// Use GitHub storage only when both env vars are present.
+// Falls back to local storage during builds that don't have them (e.g. CF native builds).
+const isGithubConfigured =
+  process.env.NODE_ENV === "production" && !!githubOwner && !!githubRepo;
 
 export default config({
-  storage:
-    process.env.NODE_ENV === "production"
-      ? {
-          kind: "github",
-          repo: {
-            owner: githubOwner as string,
-            name: githubRepo as string,
-          },
-        }
-      : { kind: "local" },
+  storage: isGithubConfigured
+    ? {
+        kind: "github",
+        repo: {
+          owner: githubOwner as string,
+          name: githubRepo as string,
+        },
+      }
+    : { kind: "local" },
 
   ui: {
     brand: { name: "Zee Portfolio CMS" },
