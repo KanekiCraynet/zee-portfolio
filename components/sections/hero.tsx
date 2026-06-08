@@ -5,7 +5,7 @@ import type { SiteConfig } from "@/lib/keystatic";
 interface HeroSectionProps { config: SiteConfig; }
 
 export function HeroSection({ config }: HeroSectionProps) {
-  const badgeClasses = "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold";
+  const badgeClasses = "inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium";
   const socials = [
     config.githubUrl && { href: config.githubUrl, label: "GitHub" },
     config.linkedinUrl && { href: config.linkedinUrl, label: "LinkedIn" },
@@ -14,10 +14,10 @@ export function HeroSection({ config }: HeroSectionProps) {
   ].filter(Boolean) as { href: string; label: string }[];
 
   return (
-    <section className="relative overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:px-8 lg:pb-24 lg:pt-36">
+    <section className="relative overflow-hidden px-4 pb-12 pt-20 sm:px-6 lg:px-8 lg:pb-20 lg:pt-28">
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2">
             <span className={badgeClasses + " border-accent/30 bg-accent/10 text-accent"}>
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
@@ -31,9 +31,9 @@ export function HeroSection({ config }: HeroSectionProps) {
             </span>
           </div>
 
-          <h1 className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.92] tracking-[-0.08em] text-foreground sm:text-7xl lg:text-8xl">
+          <h1 className="mt-6 max-w-4xl text-6xl font-semibold leading-[0.92] tracking-[-0.08em] text-foreground sm:text-7xl lg:text-8xl">
             {config.name}
-            <span className="mt-4 block max-w-3xl text-xl font-medium leading-tight tracking-[-0.04em] text-muted-foreground sm:text-3xl lg:text-4xl">
+            <span className="mt-4 block max-w-3xl text-2xl font-medium leading-tight tracking-[-0.04em] text-muted-foreground sm:text-3xl lg:text-4xl">
               Web Developer, WordPress Specialist, IT Support
             </span>
           </h1>
@@ -72,14 +72,14 @@ export function HeroSection({ config }: HeroSectionProps) {
 
         <div className="lg:col-span-5">
           <div className="overflow-hidden rounded-[2rem] border border-border bg-card/80">
-            <div className="relative overflow-hidden bg-muted/40">
+            <div className="relative overflow-hidden bg-muted/30">
               {config.avatarUrl ? (
                 <Image src={config.avatarUrl} alt={`Foto ${config.name}`} width={520} height={620} priority
-                  className="h-[28rem] w-full object-cover object-center" />
+                  className="h-[32rem] w-full object-cover object-center" />
               ) : (
-                <div className="flex h-[28rem] items-center justify-center text-7xl font-semibold text-foreground">D</div>
+                <div className="flex h-[32rem] items-center justify-center text-7xl font-semibold text-foreground">D</div>
               )}
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent p-5 text-white">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 text-white">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Professional Profile</p>
                 <h3 className="mt-1 text-xl font-semibold tracking-tight">Full-stack dev, production-ready</h3>
               </div>
