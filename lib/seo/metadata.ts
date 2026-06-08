@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import type { SiteConfig } from "@/lib/content";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_KEYWORDS } from "./constants";
 
 export const rootMetadata: Metadata = {
