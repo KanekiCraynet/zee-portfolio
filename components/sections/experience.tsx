@@ -1,6 +1,7 @@
 import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Badge } from "@/components/ui/badge";
+import { Calendar } from "lucide-react";
 import type { Experience } from "@/lib/keystatic";
 
 interface ExperienceSectionProps { experiences: Experience[]; }
@@ -20,28 +21,35 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
         <div className="mt-12 grid grid-cols-1 gap-6 lg:gap-8">
           {experiences.map((exp) => (
             <FadeIn key={exp.slug}>
-              <article className="surface-card group relative overflow-hidden rounded-3xl p-6 sm:p-8">
-                <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-accent/10 blur-2xl transition-opacity group-hover:opacity-80" />
-                <div className="relative grid gap-6 lg:grid-cols-[14rem_1fr]">
-                  <div>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              <article className="surface-card group relative overflow-hidden rounded-3xl p-6 transition-colors duration-300 hover:border-accent/30 sm:p-8 lg:p-10">
+                <div className="pointer-events-none absolute right-0 top-0 h-40 w-40 translate-x-12 -translate-y-12 rounded-full bg-accent/10 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
+                <div className="relative grid gap-x-10 gap-y-6 lg:grid-cols-[15rem_1fr]">
+                  <div className="lg:border-r lg:border-border/60 lg:pr-8">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+                      <Calendar className="h-3 w-3" strokeWidth={2.5} />
                       {exp.period}
-                    </div>
-                    <p className="mt-3 text-lg font-semibold text-foreground">{exp.company}</p>
+                    </span>
+                    <p className="mt-5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                      Perusahaan
+                    </p>
+                    <p className="mt-1.5 text-lg font-semibold leading-snug tracking-[-0.01em] text-foreground">
+                      {exp.company}
+                    </p>
                   </div>
 
                   <div>
-                    <h3 className="text-2xl font-semibold tracking-tight">{exp.role}</h3>
-                    <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
+                    <h3 className="text-2xl font-bold leading-tight tracking-[-0.02em] text-foreground sm:text-[1.75rem]">
+                      {exp.role}
+                    </h3>
+                    <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
                       {exp.description}
                     </p>
-                    <div className="mt-6 flex flex-wrap gap-2">
+                    <div className="mt-6 flex flex-wrap gap-2.5">
                       {exp.technologies.map((tech) => (
                         <Badge
                           key={tech}
                           variant="outline"
-                          className="rounded-lg border border-border/70 bg-background/50 px-3 py-1 text-sm"
+                          className="rounded-full border border-border/70 bg-background/80 px-4 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-accent/40 hover:bg-accent/5"
                         >
                           {tech}
                         </Badge>
