@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
   "name": "zee-portfolio",
-  "compatibility_date": "2024-12-30",
+  "compatibility_date": "2025-06-01",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
   "assets": {
@@ -21,6 +21,7 @@
   ],
   "vars": {
     "NEXT_PUBLIC_GITHUB_OWNER": "KanekiCraynet",
-    "NEXT_PUBLIC_GITHUB_REPO": "zee-portfolio"
-  }
+    "NEXT_PUBLIC_GITHUB_REPO": "zee-portfolio",
+    "CONTACT_EMAIL": ""
+  },
 }
