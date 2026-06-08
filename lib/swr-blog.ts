@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import type { BlogPost } from "@/lib/keystatic";
+import type { BlogPost } from "@/lib/content";
 
 const fetcher = async (url: string): Promise<BlogPost[]> => {
   const response = await fetch(url);

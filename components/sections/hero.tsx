@@ -1,17 +1,20 @@
 import Image from "next/image";
-import { ArrowRight, FileDown, MapPin } from "lucide-react";
-import type { SiteConfig } from "@/lib/keystatic";
+import type { ComponentType } from "react";
+import { ArrowRight, FileDown, MapPin, Mail } from "lucide-react";
+import { SiGithub, SiInstagram } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
+import type { SiteConfig } from "@/lib/content";
 
 interface HeroSectionProps { config: SiteConfig; }
 
 export function HeroSection({ config }: HeroSectionProps) {
   const badgeClasses = "inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium";
   const socials = [
-    config.githubUrl && { href: config.githubUrl, label: "GitHub" },
-    config.linkedinUrl && { href: config.linkedinUrl, label: "LinkedIn" },
-    config.instagramUrl && { href: config.instagramUrl, label: "Instagram" },
-    config.email && { href: `mailto:${config.email}`, label: "Email" },
-  ].filter(Boolean) as { href: string; label: string }[];
+    config.githubUrl && { href: config.githubUrl, label: "GitHub", icon: SiGithub },
+    config.linkedinUrl && { href: config.linkedinUrl, label: "LinkedIn", icon: FaLinkedin },
+    config.instagramUrl && { href: config.instagramUrl, label: "Instagram", icon: SiInstagram },
+    config.email && { href: `mailto:${config.email}`, label: "Email", icon: Mail },
+  ].filter(Boolean) as { href: string; label: string; icon: ComponentType<{ className?: string }> }[];
 
   return (
     <section className="relative overflow-hidden px-4 pb-12 pt-20 sm:px-6 lg:px-8 lg:pb-20 lg:pt-28">
@@ -34,7 +37,7 @@ export function HeroSection({ config }: HeroSectionProps) {
           <h1 className="mt-6 max-w-4xl text-6xl font-semibold leading-[0.92] tracking-[-0.08em] text-foreground sm:text-7xl lg:text-8xl">
             {config.name}
             <span className="mt-4 block max-w-3xl text-2xl font-medium leading-tight tracking-[-0.04em] text-muted-foreground sm:text-3xl lg:text-4xl">
-              Web Developer, WordPress Specialist, IT Support
+              {config.tagline}
             </span>
           </h1>
 
@@ -44,7 +47,7 @@ export function HeroSection({ config }: HeroSectionProps) {
 
           <div className="mt-8 flex flex-wrap gap-3">
             <span className="rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium text-foreground">{config.role}</span>
-            <span className="rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium text-muted-foreground">2+ tahun pengalaman praktis</span>
+            <span className="rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium text-muted-foreground">{config.availability}</span>
           </div>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -61,12 +64,16 @@ export function HeroSection({ config }: HeroSectionProps) {
           </div>
 
           <div className="mt-10 flex flex-wrap gap-2">
-            {socials.map((s) => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card/70 text-muted-foreground transition-colors hover:border-accent hover:text-accent">
-                <span className="text-xs font-bold uppercase">{s.label[0]}</span>
-              </a>
-            ))}
+            {socials.map((s) => {
+              const Icon = s.icon;
+
+              return (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card/70 text-muted-foreground transition-colors hover:border-accent hover:text-accent">
+                  <Icon className="h-4 w-4" />
+                </a>
+              );
+            })}
           </div>
         </div>
 
@@ -74,14 +81,22 @@ export function HeroSection({ config }: HeroSectionProps) {
           <div className="overflow-hidden rounded-[2rem] border border-border bg-card/80">
             <div className="relative overflow-hidden bg-muted/30">
               {config.avatarUrl ? (
-                <Image src={config.avatarUrl} alt={`Foto ${config.name}`} width={520} height={620} priority
-                  className="h-[32rem] w-full object-cover object-center" />
+                <Image
+                  src={config.avatarUrl}
+                  alt={`Foto ${config.name}`}
+                  width={520}
+                  height={620}
+                  priority
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MjAiIGhlaWdodD0iNjIwIiB2aWV3Qm94PSIwIDAgNTIwIDYyMCI+PHJlY3Qgd2lkdGg9IjUyMCIgaGVpZ2h0PSI2MjAiIGZpbGw9IiMxNzE3MUEiLz48L3N2Zz4="
+                  className="h-[32rem] w-full object-cover object-center"
+                />
               ) : (
                 <div className="flex h-[32rem] items-center justify-center text-7xl font-semibold text-foreground">D</div>
               )}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 text-white">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Professional Profile</p>
-                <h3 className="mt-1 text-xl font-semibold tracking-tight">Full-stack dev, production-ready</h3>
+                <h3 className="mt-1 text-xl font-semibold tracking-tight">{config.profileLabel}</h3>
               </div>
             </div>
             <div className="grid grid-cols-3 border-t border-border/70 text-center">

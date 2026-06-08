@@ -1,4 +1,4 @@
-import { getBlogPosts } from "@/lib/keystatic";
+import { getBlogPosts } from "@/lib/content";
 
 export const revalidate = 300;
 

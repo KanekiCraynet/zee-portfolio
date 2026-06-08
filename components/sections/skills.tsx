@@ -1,7 +1,7 @@
 import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeader } from "@/components/ui/section-header";
 import { iconMap } from "@/lib/icons";
-import type { SkillCategory } from "@/lib/keystatic";
+import type { SkillCategory } from "@/lib/content";
 
 interface SkillsSectionProps { categories: SkillCategory[]; }
 

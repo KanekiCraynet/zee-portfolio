@@ -83,9 +83,14 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
+    const honeypot = typeof body.company === "string" ? body.company.trim() : "";
     const name = typeof body.name === "string" ? body.name.trim() : "";
     const email = typeof body.email === "string" ? body.email.trim() : "";
     const message = typeof body.message === "string" ? body.message.trim() : "";
+
+    if (honeypot) {
+      return Response.json({ success: true });
+    }
 
     if (!name || !email || !message) {
       return Response.json(

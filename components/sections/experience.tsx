@@ -2,7 +2,7 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from "lucide-react";
-import type { Experience } from "@/lib/keystatic";
+import type { Experience } from "@/lib/content";
 
 interface ExperienceSectionProps { experiences: Experience[]; }
 

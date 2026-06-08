@@ -9,7 +9,7 @@ import {
 } from "@/components/animations/stagger-children";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Badge } from "@/components/ui/badge";
-import type { BlogPost } from "@/lib/keystatic";
+import type { BlogPost } from "@/lib/content";
 import { useBlogPosts } from "@/lib/swr-blog";
 import { formatDate } from "@/lib/utils";
 

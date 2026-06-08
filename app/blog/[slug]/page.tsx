@@ -5,7 +5,7 @@ import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { DocumentRenderer } from "@keystatic/core/renderer";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Badge } from "@/components/ui/badge";
-import { getBlogPost, getBlogPostSlugs } from "@/lib/keystatic";
+import { getBlogPost, getBlogPostSlugs } from "@/lib/content";
 import { buildArticleMetadata, buildArticleJsonLd } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 

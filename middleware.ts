@@ -2,41 +2,51 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const CANONICAL_HOST = "xenzee.site";
-const LEGACY_MARKETING_PARAMS = new Set(["MA", "ND", "SA"]);
+
+interface RedirectRule {
+  type: "host" | "param" | "path-prefix" | "path-exact";
+  from?: string;
+  to?: string;
+  target?: string;
+  hash?: string;
+  pattern?: string;
+}
+
+const REDIRECTS: RedirectRule[] = [
+  { type: "host", from: "www.xenzee.site", to: CANONICAL_HOST },
+  { type: "param", pattern: "MA" },
+  { type: "param", pattern: "ND" },
+  { type: "param", pattern: "SA" },
+  { type: "path-prefix", target: "/projects/", to: "/#projects" },
+  { type: "path-exact", target: "/blog/building-scalable-rails-applications", to: "/blog" },
+];
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   let shouldRedirect = false;
 
-  if (url.hostname === "www.xenzee.site") {
-    url.hostname = CANONICAL_HOST;
-    shouldRedirect = true;
-  }
-
-  for (const param of LEGACY_MARKETING_PARAMS) {
-    if (url.searchParams.has(param)) {
-      url.searchParams.delete(param);
+  for (const rule of REDIRECTS) {
+    if (rule.type === "host" && url.hostname === rule.from) {
+      url.hostname = rule.to!;
+      shouldRedirect = true;
+    } else if (rule.type === "param" && url.searchParams.has(rule.pattern!)) {
+      url.searchParams.delete(rule.pattern!);
+      shouldRedirect = true;
+    } else if (rule.type === "path-prefix" && url.pathname.startsWith(rule.target!)) {
+      url.pathname = rule.to!;
+      url.hash = "projects";
+      url.search = "";
+      shouldRedirect = true;
+    } else if (rule.type === "path-exact" && url.pathname === rule.target!) {
+      url.pathname = rule.to!;
+      url.search = "";
       shouldRedirect = true;
     }
-  }
-
-  if (url.pathname.startsWith("/projects/")) {
-    url.pathname = "/";
-    url.hash = "projects";
-    url.search = "";
-    shouldRedirect = true;
-  }
-
-  if (url.pathname === "/blog/building-scalable-rails-applications") {
-    url.pathname = "/blog";
-    url.search = "";
-    shouldRedirect = true;
   }
 
   if (shouldRedirect) {
     return NextResponse.redirect(url, 301);
   }
-
   return NextResponse.next();
 }
 

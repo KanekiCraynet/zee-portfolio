@@ -1,4 +1,4 @@
-import type { BlogPost } from "@/lib/keystatic";
+import type { BlogPost } from "@/lib/content";
 
 export type BlogPostFallback = BlogPost & {
   body: string;

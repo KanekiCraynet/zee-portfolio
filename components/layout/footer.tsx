@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
-import { getSiteConfig } from "@/lib/keystatic";
+import { getSiteConfig } from "@/lib/content";
 
 export async function Footer() {
   const config = await getSiteConfig();

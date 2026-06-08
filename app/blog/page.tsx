@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getBlogPosts } from "@/lib/keystatic";
+import { getBlogPosts } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/seo";
 import { BlogPageClient } from "./page-client";
 

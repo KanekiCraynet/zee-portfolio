@@ -7,7 +7,7 @@ import {
   StaggerItem,
 } from "@/components/animations/stagger-children";
 import { SectionHeader } from "@/components/ui/section-header";
-import type { Testimonial } from "@/lib/keystatic";
+import type { Testimonial } from "@/lib/content";
 
 interface TestimonialsSectionProps {
   testimonials: Testimonial[];

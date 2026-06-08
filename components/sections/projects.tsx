@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { ExternalLink, Github } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import type { Project } from "@/lib/keystatic";
+import type { Project } from "@/lib/content";
 
 interface ProjectsSectionProps { projects: Project[]; }
 
@@ -72,7 +73,12 @@ function ProjectCard({ project, index, large = false }: { project: Project; inde
             "max-w-2xl text-3xl font-bold leading-tight tracking-[-0.02em]",
             large && "sm:text-5xl"
           )}>
-            {project.title}
+            <Link
+              href={`/projects/${project.slug}`}
+              className="transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+            >
+              {project.title}
+            </Link>
           </h3>
         </div>
 
@@ -97,6 +103,12 @@ function ProjectCard({ project, index, large = false }: { project: Project; inde
           </div>
 
           <div className="mt-6 flex flex-wrap gap-4">
+            <Link
+              href={`/projects/${project.slug}`}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 text-sm font-medium rounded-full border border-border bg-background/60 text-foreground hover:border-accent hover:text-accent transition-colors"
+            >
+              View Details
+            </Link>
             {project.githubUrl && (
               <a
                 href={project.githubUrl}

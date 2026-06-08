@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getBlogPosts } from "@/lib/keystatic";
+import { getBlogPosts } from "@/lib/content";
 
 const SITE_URL = "https://xenzee.site";
 

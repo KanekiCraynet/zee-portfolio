@@ -10,7 +10,7 @@ import {
   getProjects,
   getSkillCategories,
   getExperiences,
-} from "@/lib/keystatic";
+} from "@/lib/content";
 import {
   buildFaqJsonLd,
   buildPersonJsonLd,

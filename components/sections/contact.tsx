@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Send, Loader2, CheckCircle, AlertCircle, Mail } from "lucide-react";
+import { Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
+import { SocialLinks } from "@/components/layout/social-links";
 import { SectionHeader } from "@/components/ui/section-header";
 import { cn } from "@/lib/utils";
-import type { SiteConfig } from "@/lib/keystatic";
+import type { SiteConfig } from "@/lib/content";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -25,6 +26,8 @@ export function ContactSection({ config }: ContactSectionProps) {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
       message: formData.get("message") as string,
+      // honeypot — empty for real users, non-empty for bots
+      company: formData.get("company") as string,
     };
 
     try {
@@ -55,41 +58,16 @@ export function ContactSection({ config }: ContactSectionProps) {
               title="Terbuka untuk peluang kerja dan kolaborasi"
               description="Kirim pesan via form, atau hubungi langsung lewat email: osanugroho03@gmail.com"
             />
-            <div className="mt-8 flex flex-wrap gap-3">
-              {config.githubUrl && (
-                <a href={config.githubUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-card/70 px-4 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:bg-card hover:text-accent"
-                  aria-label="GitHub">
-                  <span className="text-xs font-bold uppercase">GH</span>
-                </a>
-              )}
-              {config.linkedinUrl && (
-                <a href={config.linkedinUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-card/70 px-4 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:bg-card hover:text-accent"
-                  aria-label="LinkedIn">
-                  <span className="text-xs font-bold uppercase">LI</span>
-                </a>
-              )}
-              {config.instagramUrl && (
-                <a href={config.instagramUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-card/70 px-4 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:bg-card hover:text-accent"
-                  aria-label="Instagram">
-                  <span className="text-xs font-bold uppercase">IG</span>
-                </a>
-              )}
-              {config.email && (
-                <a href={`mailto:${config.email}`}
-                  className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-card/70 px-4 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:bg-card hover:text-accent"
-                  aria-label="Email">
-                  <Mail className="h-4 w-4" />
-                  {config.email.split("@")[0]}
-                </a>
-              )}
-            </div>
+            <SocialLinks config={config} showLabels className="mt-8" />
           </FadeIn>
 
           <FadeIn>
             <form onSubmit={handleSubmit} className="surface-card rounded-3xl p-8">
+              {/* Honeypot: invisible to humans, bots may fill it */}
+              <div aria-hidden="true" className="pointer-events-none absolute -left-[9999px] -top-[9999px] h-0 w-0 opacity-0">
+                <label htmlFor="company">Company</label>
+                <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+              </div>
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <Field label="Nama" id="name" placeholder="Nama Anda" />
                 <Field label="Email" id="email" type="email" placeholder="you@example.com" />

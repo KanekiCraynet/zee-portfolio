@@ -1,6 +1,6 @@
 import { SectionHeader } from "@/components/ui/section-header";
 import { MapPin, Mail, Briefcase, Languages, GraduationCap, Calendar } from "lucide-react";
-import type { SiteConfig } from "@/lib/keystatic";
+import type { SiteConfig } from "@/lib/content";
 
 interface AboutSectionProps { config: SiteConfig; }
 

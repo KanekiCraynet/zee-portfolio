@@ -19,6 +19,12 @@
       "zone_name": "xenzee.site"
     }
   ],
+  "kv_namespaces": [
+    {
+      "binding": "RATE_LIMIT",
+      "id": "e89a9b449b1949deb8c54bfcd3ab6dab"
+    }
+  ],
   "vars": {
     "NEXT_PUBLIC_GITHUB_OWNER": "KanekiCraynet",
     "NEXT_PUBLIC_GITHUB_REPO": "zee-portfolio",
