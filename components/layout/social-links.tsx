@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { SiGithub, SiInstagram } from "react-icons/si";

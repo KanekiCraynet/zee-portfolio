@@ -6,11 +6,15 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { SocialLinks } from "@/components/layout/social-links";
 import { SectionHeader } from "@/components/ui/section-header";
 import { cn } from "@/lib/utils";
-import { EMAIL_REGEX, MAX_NAME_LENGTH, MAX_MESSAGE_LENGTH } from "@/lib/validation";
+import {
+  EMAIL_REGEX,
+  MAX_NAME_LENGTH,
+  MAX_MESSAGE_LENGTH,
+  MIN_MESSAGE_LENGTH,
+} from "@/lib/validation";
 import type { SiteConfig } from "@/lib/content";
 
 const FETCH_TIMEOUT = 15_000; // 15s
-const MIN_MESSAGE_LENGTH = 10;
 
 type FormState = "idle" | "loading" | "success" | "error";
 
