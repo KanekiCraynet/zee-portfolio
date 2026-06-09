@@ -6,10 +6,11 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { SocialLinks } from "@/components/layout/social-links";
 import { SectionHeader } from "@/components/ui/section-header";
 import { cn } from "@/lib/utils";
+import { EMAIL_REGEX, MAX_NAME_LENGTH, MAX_MESSAGE_LENGTH } from "@/lib/validation";
 import type { SiteConfig } from "@/lib/content";
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FETCH_TIMEOUT = 15_000; // 15s
+const MIN_MESSAGE_LENGTH = 10;
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -26,12 +27,12 @@ export function ContactSection({ config }: ContactSectionProps) {
     if (!value.trim()) return "Wajib diisi";
     if (name === "email" && !EMAIL_REGEX.test(value))
       return "Format email tidak valid";
-    if (name === "name" && value.trim().length > 100)
-      return "Nama maksimal 100 karakter";
-    if (name === "message" && value.trim().length < 10)
-      return "Pesan minimal 10 karakter";
-    if (name === "message" && value.length > 2000)
-      return "Pesan maksimal 2000 karakter";
+    if (name === "name" && value.trim().length > MAX_NAME_LENGTH)
+      return `Nama maksimal ${MAX_NAME_LENGTH} karakter`;
+    if (name === "message" && value.trim().length < MIN_MESSAGE_LENGTH)
+      return `Pesan minimal ${MIN_MESSAGE_LENGTH} karakter`;
+    if (name === "message" && value.length > MAX_MESSAGE_LENGTH)
+      return `Pesan maksimal ${MAX_MESSAGE_LENGTH} karakter`;
     return null;
   }
 

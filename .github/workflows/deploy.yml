@@ -29,11 +29,15 @@ jobs:
       - name: Build for Cloudflare
         run: pnpm cf:build
         env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          # NOTE: RESEND_API_KEY is intentionally NOT passed here.
+          # It is a runtime-only secret, bound to the Worker via
+          # `wrangler secret put` below. Passing it at build time would
+          # widen exposure (build logs / bundle) with no benefit.
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
           NEXT_PUBLIC_GITHUB_OWNER: KanekiCraynet
           NEXT_PUBLIC_GITHUB_REPO: zee-portfolio
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          # NEXT_PUBLIC_SENTRY_DSN is inlined into the client bundle. A Sentry
+          # DSN is designed to be public, so this is acceptable.
           NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
 
       - name: Deploy to Cloudflare Workers
