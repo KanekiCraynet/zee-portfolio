@@ -45,6 +45,7 @@ export function Header() {
   return (
     <header className="fixed left-0 right-0 top-4 z-50 px-3 sm:px-6">
       <nav
+        aria-label="Navigasi utama"
         className={cn(
           "mx-auto max-w-6xl rounded-full border px-3 transition-all duration-300",
           isScrolled
@@ -53,7 +54,11 @@ export function Header() {
         )}
       >
         <div className="flex h-14 items-center justify-between">
-          <Link href="/" className="group flex items-center gap-2 rounded-full pr-3 text-sm font-semibold tracking-tight">
+          <Link
+            href="/"
+            aria-label="Ke beranda Dzakri Phalosa Nugroho"
+            className="group flex items-center gap-2 rounded-full pr-3 text-sm font-semibold tracking-tight"
+          >
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground text-background transition-transform group-hover:rotate-6">
               Z
             </span>
@@ -67,6 +72,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-200",
                     isActive ? "text-foreground" : "text-muted-foreground hover:bg-card/70 hover:text-foreground"
@@ -91,8 +97,9 @@ export function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/70 transition-colors hover:bg-accent/20"
-              aria-label="Toggle menu"
+              aria-label={isMobileMenuOpen ? "Tutup menu navigasi" : "Buka menu navigasi"}
               aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
@@ -106,6 +113,7 @@ export function Header() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
+              id="mobile-navigation"
               className="overflow-hidden md:hidden"
             >
               <div className="grid gap-1 border-t border-border/60 py-3">

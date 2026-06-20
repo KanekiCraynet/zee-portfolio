@@ -117,7 +117,7 @@ export async function POST(req: Request) {
 
     const resend = getResend();
 
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: FROM_ADDRESS,
       to: [TO_ADDRESS],
       replyTo: email,
@@ -145,7 +145,7 @@ export async function POST(req: Request) {
       return Response.json({ error: "Failed to send email." }, { status: 500 });
     }
 
-    return Response.json({ success: true, data });
+    return Response.json({ success: true });
   } catch (error) {
     console.error("API error:", error);
     return Response.json(

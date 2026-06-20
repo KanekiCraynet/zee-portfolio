@@ -28,6 +28,8 @@ export default async function Home() {
     getExperiences(),
   ]);
 
+  const featuredProjects = projects.filter((project) => project.featured);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -35,7 +37,7 @@ export default async function Home() {
       buildWebPageJsonLd(),
       buildPersonJsonLd(config),
       buildServiceJsonLd(),
-      buildProjectItemListJsonLd(projects),
+      buildProjectItemListJsonLd(featuredProjects),
       buildFaqJsonLd(),
     ],
   };
@@ -50,7 +52,7 @@ export default async function Home() {
       />
       <HeroSection config={config} />
       <AboutSection config={config} />
-      <ProjectsSection projects={projects} />
+      <ProjectsSection projects={featuredProjects} />
       <SkillsSection categories={skillCategories} />
       <ExperienceSection experiences={experiences} />
       <SeoContentSection />

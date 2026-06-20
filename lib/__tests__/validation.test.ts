@@ -1,5 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { escapeHtml, EMAIL_REGEX, MAX_NAME_LENGTH } from "../validation";
+import {
+  escapeHtml,
+  EMAIL_REGEX,
+  MAX_NAME_LENGTH,
+  MAX_EMAIL_LENGTH,
+  MAX_MESSAGE_LENGTH,
+  MIN_MESSAGE_LENGTH,
+} from "../validation";
 
 describe("escapeHtml", () => {
   it("escapes < > & \" ' characters", () => {
@@ -36,5 +43,19 @@ describe("EMAIL_REGEX", () => {
 describe("MAX_NAME_LENGTH", () => {
   it("is a positive number", () => {
     expect(MAX_NAME_LENGTH).toBeGreaterThan(0);
+  });
+});
+
+describe("validation limits", () => {
+  it("MAX_EMAIL_LENGTH follows RFC 5321 (254)", () => {
+    expect(MAX_EMAIL_LENGTH).toBe(254);
+  });
+
+  it("MAX_MESSAGE_LENGTH is greater than MIN_MESSAGE_LENGTH", () => {
+    expect(MAX_MESSAGE_LENGTH).toBeGreaterThan(MIN_MESSAGE_LENGTH);
+  });
+
+  it("MIN_MESSAGE_LENGTH is a positive number", () => {
+    expect(MIN_MESSAGE_LENGTH).toBeGreaterThan(0);
   });
 });

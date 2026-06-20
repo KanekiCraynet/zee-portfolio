@@ -14,7 +14,7 @@ export function buildWebsiteJsonLd() {
 
 export function buildWebPageJsonLd() {
   return {
-    "@type": "ProfilePage",
+    "@type": "WebPage",
     "@id": `${SITE_URL}/#webpage`,
     url: SITE_URL,
     name: "Web Developer Pekalongan | Laravel, WordPress & IT Support",
@@ -125,7 +125,7 @@ export function buildProjectItemListJsonLd(projects: Project[]) {
     "@type": "ItemList",
     "@id": `${SITE_URL}/#featured-projects`,
     name: "Portofolio proyek Web Developer Pekalongan",
-    itemListElement: projects.slice(0, 6).map((project, index) => ({
+    itemListElement: projects.map((project, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {

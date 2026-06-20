@@ -132,7 +132,11 @@ export function ContactSection({ config }: ContactSectionProps) {
           </FadeIn>
 
           <FadeIn>
-            <form ref={formRef} onSubmit={handleSubmit} noValidate
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              noValidate
+              aria-busy={formState === "loading"}
               className="surface-card rounded-3xl p-8 relative"
             >
               {/* Honeypot: invisible to humans, bots may fill it */}
@@ -143,7 +147,11 @@ export function ContactSection({ config }: ContactSectionProps) {
 
               {/* Success banner */}
               {formState === "success" && (
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-3xl bg-background/95 backdrop-blur-sm">
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-3xl bg-background/95 backdrop-blur-sm"
+                >
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/40">
                     <CheckCircle className="h-7 w-7 text-emerald-600 dark:text-emerald-400" />
                   </div>
@@ -191,7 +199,9 @@ export function ContactSection({ config }: ContactSectionProps) {
                   name="message"
                   required
                   rows={6}
-                  maxLength={2000}
+                  maxLength={MAX_MESSAGE_LENGTH}
+                  aria-invalid={Boolean(fieldErrors.message)}
+                  aria-describedby={fieldErrors.message ? "message-error" : undefined}
                   disabled={formState === "loading" || formState === "success"}
                   placeholder="Ceritakan kebutuhan atau pertanyaan Anda..."
                   className={cn(
@@ -203,13 +213,17 @@ export function ContactSection({ config }: ContactSectionProps) {
                   )}
                 />
                 {fieldErrors.message && (
-                  <p className="mt-1.5 text-xs text-red-600 dark:text-red-400">{fieldErrors.message}</p>
+                  <p id="message-error" className="mt-1.5 text-xs text-red-600 dark:text-red-400">{fieldErrors.message}</p>
                 )}
               </div>
 
               {/* Error banner */}
               {formState === "error" && errorMessage && (
-                <div className="mt-5 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-900/50 dark:bg-red-950/30">
+                <div
+                  role="alert"
+                  aria-live="assertive"
+                  className="mt-5 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-900/50 dark:bg-red-950/30"
+                >
                   <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-600 dark:text-red-400" />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-medium text-red-800 dark:text-red-300">Pesan gagal dikirim</p>
@@ -218,6 +232,7 @@ export function ContactSection({ config }: ContactSectionProps) {
                   <button
                     type="button"
                     onClick={dismissError}
+                    aria-label="Tutup pesan error"
                     className="shrink-0 rounded-full p-1 text-red-500 hover:bg-red-100 dark:hover:bg-red-900/40"
                   >
                     <X className="h-4 w-4" />
@@ -267,7 +282,9 @@ function Field({
         id={id}
         name={id}
         required
-        maxLength={type === "email" ? 254 : 100}
+        maxLength={type === "email" ? 254 : MAX_NAME_LENGTH}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? `${id}-error` : undefined}
         disabled={disabled}
         placeholder={placeholder}
         className={cn(
@@ -278,7 +295,7 @@ function Field({
           disabled && "cursor-not-allowed opacity-60"
         )}
       />
-      {error && <p className="mt-1.5 text-xs text-red-600 dark:text-red-400">{error}</p>}
+      {error && <p id={`${id}-error`} className="mt-1.5 text-xs text-red-600 dark:text-red-400">{error}</p>}
     </div>
   );
 }

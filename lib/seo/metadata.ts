@@ -30,7 +30,7 @@ export const rootMetadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/opengraph-image",
+        url: `${SITE_URL}/opengraph-image`,
         width: 1200,
         height: 630,
         alt: "Dzakri Phalosa Nugroho — Web Developer & IT Support Pekalongan",
@@ -41,7 +41,7 @@ export const rootMetadata: Metadata = {
     card: "summary_large_image",
     title: "Web Developer Pekalongan | Laravel, WordPress & IT Support",
     description: SITE_DESCRIPTION,
-    images: ["/opengraph-image"],
+    images: [`${SITE_URL}/opengraph-image`],
   },
   robots: {
     index: true,

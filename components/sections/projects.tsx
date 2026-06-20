@@ -50,7 +50,7 @@ function ProjectCard({ project, index, large = false }: { project: Project; inde
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub"
+                aria-label={`Buka repositori GitHub ${project.title}`}
                 className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background/60 text-muted-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Github className="h-4 w-4" />
@@ -61,7 +61,7 @@ function ProjectCard({ project, index, large = false }: { project: Project; inde
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Live Demo"
+                aria-label={`Buka live demo ${project.title}`}
                 className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background/60 text-muted-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <ExternalLink className="h-4 w-4" />
@@ -105,6 +105,7 @@ function ProjectCard({ project, index, large = false }: { project: Project; inde
           <div className="mt-6 flex flex-wrap gap-4">
             <Link
               href={`/projects/${project.slug}`}
+              aria-label={`Lihat detail proyek ${project.title}`}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 text-sm font-medium rounded-full border border-border bg-background/60 text-foreground hover:border-accent hover:text-accent transition-colors"
             >
               View Details
@@ -114,6 +115,7 @@ function ProjectCard({ project, index, large = false }: { project: Project; inde
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Buka repositori GitHub ${project.title}`}
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 text-sm font-medium rounded-full border border-accent bg-accent/10 text-accent hover:bg-accent/20 transition-colors"
               >
                 <Github className="h-3 w-3" /> GitHub
@@ -124,6 +126,7 @@ function ProjectCard({ project, index, large = false }: { project: Project; inde
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Buka live demo ${project.title}`}
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 text-sm font-medium rounded-full border border-accent bg-accent/10 text-accent hover:bg-accent/20 transition-colors"
               >
                 <ExternalLink className="h-3 w-3" /> Live Demo

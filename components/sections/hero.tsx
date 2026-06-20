@@ -96,7 +96,7 @@ export function HeroSection({ config }: HeroSectionProps) {
               )}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 text-white">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Professional Profile</p>
-                <h3 className="mt-1 text-xl font-semibold tracking-tight">{config.profileLabel}</h3>
+                <p className="mt-1 text-xl font-semibold tracking-tight">{config.profileLabel}</p>
               </div>
             </div>
             <div className="grid grid-cols-3 border-t border-border/70 text-center">
