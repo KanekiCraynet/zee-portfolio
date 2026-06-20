@@ -4,8 +4,8 @@ import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_KEYWORDS } from "./constant
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Web Developer Pekalongan | Laravel, WordPress & IT Support",
-    template: "%s | Dzakri Phalosa Nugroho",
+    default: "Web Developer Pekalongan | Laravel & WordPress",
+    template: "%s | Dzakri Nugroho",
   },
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
@@ -19,6 +19,7 @@ export const rootMetadata: Metadata = {
     canonical: "/",
     languages: {
       "id-ID": "/",
+      "x-default": "/",
     },
   },
   openGraph: {
@@ -26,7 +27,7 @@ export const rootMetadata: Metadata = {
     locale: "id_ID",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "Web Developer Pekalongan | Laravel, WordPress & IT Support",
+    title: "Web Developer Pekalongan | Laravel & WordPress",
     description: SITE_DESCRIPTION,
     images: [
       {
@@ -39,7 +40,7 @@ export const rootMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web Developer Pekalongan | Laravel, WordPress & IT Support",
+    title: "Web Developer Pekalongan | Laravel & WordPress",
     description: SITE_DESCRIPTION,
     images: [`${SITE_URL}/opengraph-image`],
   },

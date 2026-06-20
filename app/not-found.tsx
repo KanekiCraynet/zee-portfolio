@@ -1,6 +1,16 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
+
+export const metadata: Metadata = {
+  title: "404 | Halaman Tidak Ditemukan",
+  description: "Halaman yang kamu cari tidak tersedia atau sudah dipindahkan.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function NotFound() {
   return (

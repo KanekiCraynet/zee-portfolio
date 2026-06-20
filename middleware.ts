@@ -17,7 +17,7 @@ const REDIRECTS: RedirectRule[] = [
   { type: "param", pattern: "MA" },
   { type: "param", pattern: "ND" },
   { type: "param", pattern: "SA" },
-  { type: "path-prefix", target: "/projects/", to: "/#projects" },
+  { type: "path-exact", target: "/projects", to: "/" },
   { type: "path-exact", target: "/blog/building-scalable-rails-applications", to: "/blog" },
 ];
 
